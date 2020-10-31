@@ -2,16 +2,106 @@
 <html>
 
 <head>
-<title>EPS Infamaras</title>
+    <title>Infamaras</title>
     <meta charset="UTF-8" />
-   <link rel="stylesheet" type="text/css" href="css/style.css">
+
+<!--Enlaces de estilo -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="icon" type="image/png" href="img/Logito.png" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
 </head>
+
+<!--Encabezado (Fijo) -->
+<header>
+       <img src="img/Logito.png" align="left">
+       <h1>Infaramas</h1> <h2>Cuidamos tu salud</h2>
+</header>
 
 <body>
 
+ <!-- Formulario de Inicio se Sesión -->
+    <div id="fondo">
+        <div id="login" class="animate__animated animate__pulse">
+            <br><br>
+            <h3 align="center">Iniciar Sesión</h3>
+            <br>
+            <form>
 
- <!--ParteLogin-->
+                <div class="form-group">
+                    <label for="correoLogin">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="correoL" placeholder="Ingresa tu Correo">
+                </div>
 
+                <div class="form-group">
+                    <label for="passLogin">Contraseña</label>
+                    <input type="password" class="form-control" id="passL" placeholder="Ingresa tu Contraseña">
+                </div>
+
+
+                <div id="alertaLogin">
+                </div>
+                <div class="col text-center">
+                    <button id="Ingresar" type="button" class="btn btn-outline-info">Ingresar</button> <p> <br>
+                    ¿No tienes todavía una cuenta?
+		    <br>
+                    <button id="Entrar" type="button" class="btn btn-link">Regístrate</button>
+                </div>
+
+            </form>
+     </div>
+ <!-- Formulario de Registro -->
+     <div id="Registro" style="display: none;" class="animate__animated animate__pulse">
+            <br>
+            <h3 align="center">Registro</h3>
+            <br>
+            <form>
+
+             <div class="form-group">
+                    <label for="Nombre">Nombre</label>
+                    <input id="nombre" type="text" class="form-control" placeholder="Nombre">
+             </div>
+
+             <div class="form-group">
+                    <label for="Apellido">Apellido</label>
+                    <input id="apellido" type="text" class="form-control" placeholder="Apellido">
+             </div>
+
+             <div class="form-group">
+                    <label for="Correo">Correo</label>
+                    <input type="email" id="email" class="form-control" placeholder="Correo Electrónico">
+                </div>
+             <div class="form-group">
+                    <label for="Correo2">Verifica tu Correo</label>
+                    <input type="email" id="verifyemail" class="form-control" id="emailverification"
+                        placeholder="Correo Electrónico">
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress2">Contraseña</label>
+                    <input type="password" id="pass" class="form-control" id="pass" placeholder="Contraseña">
+                </div>
+
+                <div class="col text-center">
+                    <button id="Devolver" type="button" class="btn btn-outline-danger">Cancelar</button>
+                    <button id="Registrar" type="button" class="btn btn-outline-info">Registrar</button>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+
+<!--JavaScript -->
+    <script src="js/main.js" type="text/javascript"></Script>
+    <script src="js/peticiones.js" type="text/javascript"></Script>
 
 </body>
 
