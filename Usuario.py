@@ -8,15 +8,15 @@ class usuarioClass:
  contrasenia=None
  correo=None
  def __init__(self,Nombre,correo,contrasenia):
-  self.Nombre = Nombre
-  self.contrasenia=contrasenia
-  self.correo=correo
+    self.Nombre = Nombre
+    self.contrasenia=contrasenia
+    self.correo=correo
  def ObtenerUsuario(self,correo1, contrasenia1):
   try:
    aux=False
    cnx = mysql.connector.connect(user='alejandro', password = 'Pass.123', database='db',host='127.0.0.1')
    cursor = cnx.cursor()
-   cursor.execute("select * from user where correo='{}' and pass=sha('{}');".format(correo1,contrasenia1))
+   cursor.execute("select * from Usuario where correo_Usuario='{}' and contrasenia=sha('{}');".format(correo1,contrasenia1))
    data = cursor.fetchone()
    if data == None:
      return None
