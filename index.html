@@ -5,13 +5,12 @@
     <title>Infamaras</title>
     <meta charset="UTF-8" />
 
-<!--Enlaces de estilo -->
+    <!--Enlaces de estilo -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="icon" type="image/png" href="img/Logito.png" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
@@ -20,13 +19,14 @@
 
 <!--Encabezado (Fijo) -->
 <header>
-       <img src="img/Logito.png" align="left">
-       <h1>Infaramas</h1> <h2>Cuidamos tu salud</h2>
+    <img src="img/Logito.png" align="left">
+    <h1>Infaramas</h1>
+    <h2>Cuidamos tu salud</h2>
 </header>
 
 <body>
 
- <!-- Formulario de Inicio se Sesión -->
+    <!-- Formulario de Inicio se Sesión -->
     <div id="fondo">
         <div id="login" class="animate__animated animate__pulse">
             <br><br>
@@ -48,39 +48,36 @@
                 <div id="alertaLogin">
                 </div>
                 <div class="col text-center">
-                    <button id="Ingresar" type="button" class="btn btn-outline-info">Ingresar</button> <p> <br>
-                    ¿No tienes todavía una cuenta?
-		    <br>
-                    <button id="Entrar" type="button" class="btn btn-link" onclick="login();">Regístrate</button>
+                    <button id="Ingresar" type="button" class="btn btn-outline-info">Ingresar</button>
+                    <p> <br> ¿No tienes todavía una cuenta?
+                        <br>
+                        <button id="Entrar" type="button" class="btn btn-link">Regístrate</button>
                 </div>
 
             </form>
-     </div>
- <!-- Formulario de Registro -->
-     <div id="Registro" style="display: none;" class="animate__animated animate__pulse">
-            <br>
+        </div>
+        <!-- Formulario de Registro -->
+        <div id="Registro" style="display: none;" class="animate__animated animate__pulse">
             <h3 align="center">Registro</h3>
-            <br>
             <form>
 
-             <div class="form-group">
+                <div class="form-group">
                     <label for="Nombre">Nombre</label>
                     <input id="nombre" type="text" class="form-control" placeholder="Nombre">
-             </div>
+                </div>
 
-             <div class="form-group">
+                <div class="form-group">
                     <label for="Apellido">Apellido</label>
                     <input id="apellido" type="text" class="form-control" placeholder="Apellido">
-             </div>
+                </div>
 
-             <div class="form-group">
+                <div class="form-group">
                     <label for="Correo">Correo</label>
                     <input type="email" id="email" class="form-control" placeholder="Correo Electrónico">
                 </div>
-             <div class="form-group">
+                <div class="form-group">
                     <label for="Correo2">Verifica tu Correo</label>
-                    <input type="email" id="verifyemail" class="form-control" id="emailverification"
-                        placeholder="Correo Electrónico">
+                    <input type="email" id="verifyemail" class="form-control" id="emailverification" placeholder="Correo Electrónico">
                 </div>
                 <div class="form-group">
                     <label for="inputAddress2">Contraseña</label>
@@ -97,8 +94,130 @@
         </div>
     </div>
 
+    <!--Pagina Principal -->
+    <div id="Contenido">
+        <br>
+        <br>
+        <div id="menu" style="display: none;" class="animate__animated animate__pulse">
+            <h2>Control de Medicamentos</h2>
+            <br>
+            <p>Escoja una opción entre las siguientes:
+                <form>
+                    <div class="col text-center">
+                        <button id="Crear" type="button" class="btn btn-outline-warning">Crea</button>
+                        <button id="Consultar" type="button" class="btn btn-outline-success">Consulta</button><br>
+                        <button id="Modificar" type="button" class="btn btn-outline-success">Modifica</button>
+                        <button id="Eliminar" type="button" class="btn btn-outline-warning">Elimina</button><br>
+                        <button id="Cerrar" type="submit" class="btn btn-danger">Cerrar Sesión</button>
+                    </div>
 
-<!--JavaScript -->
+                </form>
+        </div>
+        <div id="crearmed" style="display: none;" class="animate__animated animate__pulse">
+            <br>
+            <h3 align="center">Nuevo Medicamento</h3>
+            <br>
+            <form>
+
+                <div class="form-group">
+                    <label for="Nombre">Nombre del medicamento</label>
+                    <input id="medname" type="text" class="form-control" placeholder="Nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="Des">Descripción</label>
+                    <input id="descp" type="text" class="form-control" placeholder="Descripcion">
+                </div>
+
+                <div class="form-group">
+                    <label for="Cint">Contra Indicaciones:</label>
+                    <input type="text" id="cint" class="form-control" placeholder="Contra indicaciones">
+                </div>
+                <div class="col text-center">
+                    <button id="DevolverMed" type="button" class="btn btn-outline-danger">Cancelar</button>
+                    <button id="RegistrarMed" type="button" class="btn btn-outline-info">Registrar</button>
+
+                </div>
+            </form>
+        </div>
+        <div id="modmed" style="display: none;" class="animate__animated animate__pulse">
+            <br>
+            <h3 align="center">Modificar Medicamento</h3>
+            <br>
+            <form>
+                <div class="form-group">
+                    <label for="Nombre">Nombre del medicamento</label>
+                    <input id="medname" type="text" class="form-control" placeholder="Nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="Des">Descripción</label>
+                    <input id="descp" type="text" class="form-control" placeholder="Descripcion">
+                </div>
+
+                <div class="form-group">
+                    <label for="Cint">Contra Indicaciones:</label>
+                    <input type="text" id="cint" class="form-control" placeholder="Contra indicaciones">
+                </div>
+                <div class="col text-center">
+                    <button id="DevolverMedM" type="button" class="btn btn-outline-danger">Cancelar</button>
+                    <button id="ModMed" type="button" class="btn btn-outline-info">Registrar</button>
+
+                </div>
+            </form>
+        </div>
+        <div id="delmed" style="display: none;" class="animate__animated animate__pulse">
+            <br>
+            <h3 align="center">Eliminar Medicamento</h3>
+            <br>
+            <form>
+                <div class="form-group">
+                    <label for="Nombre">Nombre del medicamento</label>
+                    <input id="medname" type="text" class="form-control" placeholder="Nombre">
+                </div>
+                <div class="col text-center">
+                    <button id="DevolverMedD" type="button" class="btn btn-outline-danger">Cancelar</button>
+                    <button id="DelMed" type="button" class="btn btn-outline-warning">Eliminar</button>
+
+                </div>
+            </form>
+        </div>
+        <div id="quemed" style="display: none;" class="animate__animated animate__pulse">
+            <br>
+            <h3 align="center">Consulta de Medicamento</h3>
+            <br>
+            <form>
+                <div class="form-group">
+                    <label for="Nombre">Nombre del medicamento</label>
+                    <input id="medname" type="text" class="form-control" placeholder="Nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="Des">Descripción</label>
+                    <input id="descp" type="text" class="form-control" placeholder="Descripcion">
+                </div>
+
+                <div class="form-group">
+                    <label for="Cint">Contra Indicaciones:</label>
+                    <input type="text" id="cint" class="form-control" placeholder="Contra indicaciones">
+                </div>
+                <div class="col text-center">
+                    <button id="DevolverMedQ" type="button" class="btn btn-outline-danger">Cancelar</button>
+                    <button id="QueMed" type="button" class="btn btn-outline-success">Consultar</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    </div>
+
+
+
+
+
+
+    <!--JavaScript -->
     <script src="js/animaciones.js" type="text/javascript"></Script>
     <script src="js/funciones.js" type="text/javascript"></Script>
 

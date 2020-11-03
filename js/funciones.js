@@ -8,19 +8,18 @@ async function crearCuenta(nombre, apellido, correo, contraseña) {
         "fname": nombre,
         "lname": apellido,
         "password": contraseña,
-	"rol": 'Paciente'
+        "rol": 'Paciente'
     }
-
     $.ajax({
-	url: url+'/cgi-bin/Proyecto/EPSProject/ControladorRegistro.py',
-	data: JSON.stringify(data),
-	type: "POST",
-	dataType: 'json',
-	contentType: "application/json; charset=utf-8"
-    }).done(function(data){
-	alert("Registro exitoso");
-    }).fail(function(data){
-	alert("Error en el registro");
+        url: url + '/cgi-bin/Proyecto/EPSProject/ControladorRegistro.py',
+        data: JSON.stringify(data),
+        type: "POST",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8"
+    }).done(function(data) {
+        return 1
+    }).fail(function(data) {
+        return 2
     });
 
 }
@@ -32,15 +31,15 @@ async function login(correo, contraseña) {
         "password": contraseña
     }
     $.ajax({
-        url: url+'/cgi-bin/Proyecto/EPSProject/ControladorLogin.py',
+        url: url + '/cgi-bin/Proyecto/EPSProject/ControladorLogin.py',
         data: JSON.stringify(data),
         type: "POST",
         dataType: 'json',
         contentType: "application/json; charset=utf-8"
-    }).done(function(data){
-        alert("Bienvenido");
-    }).fail(function(data){
-        alert("Datos incorrectos");
+    }).done(function(data) {
+        return 1
+    }).fail(function(data) {
+        return 2
     });
 
 }
