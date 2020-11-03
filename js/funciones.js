@@ -1,60 +1,23 @@
-const url = "cgi-bin/EPSProject";
-
-//var nombre=$("#").val();
-//var nombre=$("#").val();
+const ur= "http://ec2-34-227-90-132.compute-1.amazonaws.com/";
+const url = "/cgi-bin/EPSProject";
 
 
-$("#btnIngresar").click(function(e){
-    var correoL=$("#correoL").val();
-    var passL=$("#passL").val();
-    login(correoL,passL);
-});
 
-$("#btnRegistrar").click(function(e){
-    var nombre=$("#nombre").val();
-    var apellido=$("#apellido").val();
-    var correo=$("#email").val();
-    var contrasenia=$("#pass").val();
-    crearCuenta(nombre, apellido, correo, contrasenia);
-});
-
-$("#btnIngresar").click(function(e){
-    var medname=$("#medname").val();
-    var descp=$("#descp").val();
-    var cint=$("#cint").val();
-    registrarMed(medname,descp,cint);
-});
-
-$("#btnModMed").click(function(e){
-    var medname=$("#medname").val();
-    var descp=$("#descp").val();
-    var cint=$("#cint").val();
-    modificarMed(medname,descp,cint);
-});
-
-$("#btnDelMed").click(function(e){
-    var medname=$("#medname").val();
-    eliminarMed(medname);
-});
-
-$("#btnQueMed").click(function(e){
-    var medname=$("#medname").val();
-    consultarMed(medname);
-});
 
 function crearCuenta(nombre, apellido, correo, contrasenia) {
     let result;
-    let data = {
+    var obj = {
         "email": correo,
         "fname": nombre,
         "lname": apellido,
         "password": contrasenia,
-        "rol": 'Paciente',
-    }
+        "rol": 'Operario'
+    };
     $.ajax({
         method: 'POST',
         url: url + '/ControladorRegistro.py',
         dataType: 'json',
+	data: obj,
         success: function(rta) {
             response=JSON.parse(rta);
             if(response.tipo==="OK"){
@@ -67,31 +30,39 @@ function crearCuenta(nombre, apellido, correo, contrasenia) {
         error: function(response){
             console.log(JSON.stringify(response))
         }
-    }); 
+    });
 }
 
-function login(correo, contraseña) {
-    let result;
-    let data = {
+function login(correo, contrasenia){
+    let  dat = {
         "email": correo,
-        "password": contraseña
-    }
+        "password": contrasenia
+    };
     $.ajax({
+	method: 'POST',
         url: url + '/ControladorLogin.py',
-        data: JSON.stringify(data),
-        type: "POST",
+        data: dat,
         dataType: 'json',
-        contentType: "application/json; charset=utf-8"
-    }).done(function(data) {
-        return 1
-    }).fail(function(data) {
-        return 2
+    	success: function(rta) {
+            response=JSON.parse(rta);
+            if(response.tipo==="OK"){
+                return 1
+            }
+            else{
+                alert("Error: "+response.mensaje)
+		return 2
+            }
+        },
+        error: function(response){
+            console.log(JSON.stringify(response))
+        }
+
     });
 }
 
 function registrarMed(medname,descp,cint) {
     let result;
-    let data = {
+    var dat = {
         "medname": medname,
         "descp": descp,
         "cint": cint,
@@ -99,7 +70,8 @@ function registrarMed(medname,descp,cint) {
     }
     $.ajax({
         method: 'POST',
-        url: url + '/ControladorMedicamentos.py',
+        url: url + '/ControlaMedicamentos.py',
+	data: dat,
         dataType: 'json',
         success: function(rta) {
             response=JSON.parse(rta);
@@ -118,7 +90,7 @@ function registrarMed(medname,descp,cint) {
 
 function modificarMed(medname,descp,cint) {
     let result;
-    let data = {
+    var dat = {
         "medname": medname,
         "descp": descp,
         "cint": cint,
@@ -127,7 +99,8 @@ function modificarMed(medname,descp,cint) {
     $.ajax({
         method: 'POST',
         url: url + '/ControladorMedicamentos.py',
-        dataType: 'json',
+	data: dat,
+        dataType: 'json',	
         success: function(rta) {
             response=JSON.parse(rta);
             if(response.tipo==="OK"){
@@ -145,13 +118,14 @@ function modificarMed(medname,descp,cint) {
 
 function eliminarMed(medname) {
     let result;
-    let data = {
+    var dat = {
         "medname": medname,
         "act": 'del'
     }
     $.ajax({
         method: 'POST',
         url: url + '/ControladorMedicamentos.py',
+	data: dat,
         dataType: 'json',
         success: function(rta) {
             response=JSON.parse(rta);
@@ -170,13 +144,14 @@ function eliminarMed(medname) {
 
 function consultarMed(medname) {
     let result;
-    let data = {
+    var dat = {
         "medname": medname,
         "act": 'del'
     }
     $.ajax({
         method: 'POST',
         url: url + '/ControladorMedicamentos.py',
+	data: dat,
         dataType: 'json',
         success: function(rta) {
             response=JSON.parse(rta);

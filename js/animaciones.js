@@ -23,13 +23,13 @@ $("#Registrar").click(function() {
     apellido = $("#apellido").val();
     correo = $("#email").val();
     correo2 = $("#verifyemail").val();
-    contraseña = $("#pass").val();
+    contrasenia = $("#pass").val();
 
     //Verificar datos
-    if (nombre == "" || apellido == "" || correo == "" || correo2 == "" || contraseña == "") {
+    if (nombre == "" || apellido == "" || correo == "" || correo2 == "" || contrasenia == "") {
         swal("Error", "Por favor, Ingrese todos los datos", "error");
     } else if (correo == correo2 && correo.includes('@')) {
-        guardar(nombre, apellido, correo, contraseña);
+        guardar(nombre, apellido, correo, contrasenia);
     } else if (!correo.includes('@')) {
         swal("Error", "Por favor, Ingrese un formato de correo válido", "error");
     } else {
@@ -37,8 +37,8 @@ $("#Registrar").click(function() {
     }
 });
 
-async function guardar(nombre, apellido, correo, contraseña) {
-    var save = await crearCuenta(nombre, apellido, correo, contraseña)
+async function guardar(nombre, apellido, correo, contrasenia) {
+    var save = await crearCuenta(nombre, apellido, correo, contrasenia)
     if (save == 1) {
         swal("Correcto", "¡Registro exitoso!", "success")
             .then((value) => {
@@ -59,28 +59,56 @@ $("#Ingresar").click(function() {
 
     //Recolectar Datos
     correo = $("#correoL").val();
-    contraseña = $("#passL").val();
-
+    contrasenia = $("#passL").val();
     //Verificar datos
-    if (correo == "" || contraseña == "") {
+    if (correo == "" || contrasenia == "") {
         swal("Error", "Por favor, Ingrese todos los datos", "error");
     } else {
-        Inicio(correo, contraseña)
+        Inicio(correo, contrasenia)
     }
 
 });
 
-async function Inicio(correo, contraseña) {
-    var save = await login(correo, contraseña);
+async function Inicio(correo, contrasenia) {
+    var save = await lgin(correo, contrasenia);
     if (save == 1) {
         swal("Correcto", "Bienvenido", "success")
+	mostrarPaginaPrincipal()
     } else if (save == 2) {
         swal("Error", "Datos erróneos", "error");
     } else {
-        swal("PruebaError", "Realizada correctamente", "success")
-        mostrarPaginaPrincipal();
+        swal("Error", "Interno", "error")
     }
 }
+
+function lgin(correo, contrasenia){
+    let  dat = {
+        email: correo,
+        password: contrasenia
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '/cgi-bin/EPSProject/ControladorLogin.py',
+        data: JSON.stringify(dat),
+        dataType: 'json',
+	//contentType: "application/json; charset=utf-8",
+        success: function(rta){
+            response=JSON.parse(rta);
+            if(response.tipo==="OK"){
+                return 1
+            }
+            else{
+                alert("Error: "+response.mensaje)
+                return 2
+            }
+        },
+        error: function(response){
+            console.log(response)
+        }
+    });  
+}
+
 
 function mostrarPaginaPrincipal() {
     $("#login").removeClass("animate__animated animate__backInLeft");
@@ -195,7 +223,7 @@ $("#RegistrarMed").click(function() {
 });
 
 async function guardarMed(name, des, cint) {
-    var save = await crearMed(name, des, cint)
+    var save = await registrarMed(name, des, cint)
     if (save == 1) {
         swal("Correcto", "¡Registro exitoso!", "success")
             .then((value) => {
@@ -220,12 +248,12 @@ $("#ModMed").click(function() {
     if (name == "" || des == "" || cint == "") {
         swal("Error", "Por favor, Ingrese todos los datos", "error");
     } else {
-        modificarMed(name, des, cint);
+        modMed(name, des, cint);
     }
 });
 
-async function modificarMed(name, des, cint) {
-    var save = await updMed(name, des, cint)
+async function modMed(name, des, cint) {
+    var save = await modificarMed(name, des, cint)
     if (save == 1) {
         swal("Correcto", "¡Actualización exitosa!", "success")
             .then((value) => {
@@ -247,12 +275,12 @@ $("#DelMed").click(function() {
     if (name == "") {
         swal("Error", "Por favor, Ingrese el nombre del medicamento a eliminar", "error");
     } else {
-        eliminarMed(name);
+        delMed(name);
     }
 });
 
-async function eliminarMed(name, des, cint) {
-    var save = await deleMed(name, des, cint)
+async function delMed(name, des, cint) {
+    var save = await eliminarMed(name, des, cint)
     if (save == 1) {
         swal("Correcto", "¡Se ha borrado el medicamento", "success")
         DevolverEliMed()
@@ -272,14 +300,14 @@ $("#ModMed").click(function() {
     if (name == "") {
         swal("Error", "Por favor, Ingrese el nombre del medicamento", "error");
     } else {
-        consultarMed(name);
+        consulMed(name);
     }
 });
 
-async function consultarMed(name) {
-    var save = await queryMed(name)
+async function consulMed(name) {
+    var save = await cosnultarMed(name)
     if (save == 1) {
-
+	console.log("si")
     } else if (save == 2) {
         swal("Error", "Error, no se ha encontrado el medicamento", "error");
     }
