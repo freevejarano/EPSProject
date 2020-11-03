@@ -1,31 +1,43 @@
 #!/usr/bin/python3
 
 from Medicamento import mediClass as med
+import json
 import cgi
 
+print('Content-Type: text/json')
+print('')
 data=cgi.FieldStorage()
 
 if(data.getvalue('act')=="ins"):
-    medica=med.InsertarMedicamento(data.getvalue('medname'),data.getvalue('descp'),data.getvalue('cint'))
-elif (data.getvalue('act')=="act"):
-    medica = med.ActualizarMedicamento(data.getvalue('medname'), data.getvalue('descp'), data.getvalue('cint'))
-elif (data.getvalue('act')=="cons"):
-    medica = med.ObtenerMedicamento(data.getvalue('medname'))
-elif (data.getvalue('act')=="del"):
-    medica = med.BorrarMedicamento(data.getvalue('medname'))
-    
-print('Content-Type:text/html')
-print('')
-def render(archivo,modelo=None):
-    with open(archivo) as f:
-         pagina=f.read()
-         if modelo:
-           pagina=pagina.format(nombre=modelo.Nombre)
-    return pagina
+    medIns=med(data.getvalue('medname'),data.getvalue('descp'),data.getvalue('cint'))
+    if(medIns.InsertarMedicamento()):
+        print(json.dumps('{"tipo":"OK",mensaje:"Medicamento creado"}'))
+    else:
+        print(json.dumps('{"tipo":"error", "mensaje":"Error al crear el medicamento"}'))
 
-if medica== None:
-   pagina=render("Login2.html")
-   print(pagina)
-else:
-  pagina=render("Login3.html",medica)
-  print(pagina)
+elif (data.getvalue('act')=="upd"):
+    medup = med.ActualizarMedicamento(data.getvalue('medname'), data.getvalue('descp'), data.getvalue('cint'))
+    if (medup is not None):
+        print(json.dumps('{"tipo":"OK", "mensaje":"Medicamento actualizado"}'))
+    else:
+        print(json.dumps('{"tipo":"error", "mensaje":"Error al actualizar el medicamento"}'))
+elif (data.getvalue('act')=="cons"):
+    medob = med.ObtenerMedicamento(data.getvalue('medname'))
+    print("[")
+    n=len(medob)
+    i=1
+    for medicam in medob:
+        print(json.dumps(medob.__dict__))
+        if i < medob:
+            print(",")
+            i = i + 1
+    print("]")
+
+elif (data.getvalue('act')=="del"):
+    medel = med.BorrarMedicamento(data.getvalue('medname'))
+    if(medel):
+        print(json.dumps('{"tipo":"OK", "mensaje":"Medicamento eliminado"}'))
+    else:
+        print(json.dumps('{"tipo":"error", "mensaje":"Error al eliminar el medicamento"}'))
+
+

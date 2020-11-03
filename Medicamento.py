@@ -18,21 +18,23 @@ class mediClass:
    cursor = cnx.cursor()
    cursor.execute("select * from Medicamento where nombre_med='{}';".format(nmed))
    data = cursor.fetchone()
+   u= None
    if data == None:
      return None
    else:
      u=mediClass(data[1],data[2],data[3])
-     return u
    cursor.close()
+   cnx.close()
+   return u
   except mysql.connector.Error as err:
-   if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-     print("Something is wrong with your user name or password")
-   elif err.errno == errorcode.ER_BAD_DB_ERROR:
-     print("Database does not exist")
-   else:
-     print(err)
+    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+         print("Something is wrong with your user name or password")
+    elif err.errno == errorcode.ER_BAD_DB_ERROR:
+        print("Database does not exist")
+    return None
   else:
-    cnx.close()
+      cnx.close()
+      return None
 
  def InsertarMedicamento(self, name,descrip,contraindica):
     try:
@@ -42,6 +44,8 @@ class mediClass:
                        " value('{}','{}','{}');".format(name, descrip, contraindica)); #Sentencia SQL
         cnx.commit()
         cursor.close()
+        cnx.close()
+        return True
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
             print("Something is wrong with your user name or password")
@@ -49,8 +53,10 @@ class mediClass:
             print("Database does not exist")
         else:
             print(err)
+        return False
     else:
-            cnx.close()
+        cnx.close()
+        return False
 
  def ActualizarMedicamento(self,name,descrip,contraindica):
   try:
@@ -87,11 +93,11 @@ class mediClass:
           cursor.execute("select * from Medicamento where nombre_med='{}';".format(name))
           data = cursor.fetchone()
           if data == None:
-              return None
+              cursor.close()
+              return True
           else:
-              u = mediClass(data[1], data[2], data[3])
-              return u
-          cursor.close()
+              cursor.close()
+              return False
       except mysql.connector.Error as err:
           if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
               print("Something is wrong with your user name or password")
@@ -99,5 +105,7 @@ class mediClass:
               print("Database does not exist")
           else:
               print(err)
+          return False
       else:
           cnx.close()
+          return False

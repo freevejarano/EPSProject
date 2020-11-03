@@ -1,24 +1,19 @@
 #!/usr/bin/python3
 
-import cgi
 from Usuario import usuarioClass as us
+import cgi
+import json
 
+print('Content-Type: text/json')
+print('')
 data=cgi.FieldStorage()
 
 usuario=us.ObtenerUsuario(data.getvalue('email'),data.getvalue('contra'))
 
-print('Content-Type:text/html')
-print('')
-def render(archivo,modelo=None):
-    with open(archivo) as f:
-         pagina=f.read()
-         if modelo:
-           pagina=pagina.format(nombre=modelo.Nombre)
-    return pagina
-
-if usuario== None:
-   pagina=render("Login2.html")
-   print(pagina)
+email=data.getvalue('email')
+contraseña =data.getvalue('contra')
+if(usuario is not None):
+    print(json.dumps('{"tipo":"OK","mensaje":"Bienvenido"}'))
 else:
-  pagina=render("Login3.html",usuario)
-  print(pagina)
+    print(json.dumps('{"tipo":"error","mensaje":"Usuario o contrasena inválidos"}'))
+
