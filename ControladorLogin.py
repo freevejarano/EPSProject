@@ -5,7 +5,7 @@ from Usuario import usuarioClass as us
 
 data=cgi.FieldStorage()
 
-usuario=us.ObtenerUsuario(data.getvalue('correo'),data.getvalue('contra'))
+usuario=us.ObtenerUsuario(data.getvalue('email'),data.getvalue('contra'))
 
 print('Content-Type:text/html')
 print('')
