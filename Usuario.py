@@ -4,9 +4,7 @@ from mysql.connector import errorcode
 from datetime import datetime
 
 class usuarioClass:
- Nombre=None
- contrasenia=None
- correo=None
+ 
  def __init__(self,name,ape,correo,rol,contra):
     self.Nombre = name
     self.Apellido= ape
@@ -14,10 +12,10 @@ class usuarioClass:
     self.rol= rol
     self.contrasenia=contra
 
- def ObtenerUsuario(self,correo1, contrasenia1):
+ def ObtenerUsuario(correo1, contrasenia1):
     try:
         aux=False
-        cnx = mysql.connector.connect(user='alejandro', password = 'Pass.123', database='db',host='127.0.0.1')
+        cnx = mysql.connector.connect(user='alejandro', password = 'Pass.123', database='EPS',host='127.0.0.1')
         cursor = cnx.cursor()
         cursor.execute("select * from Usuario where correo_Usuario='{}' and contrasenia=sha('{}');".format(correo1,contrasenia1))
         data = cursor.fetchone()
@@ -36,15 +34,15 @@ class usuarioClass:
         elif err.errno == errorcode.ER_BAD_DB_ERROR:
             print("Database does not exist")
         else:
-            print(err)
+            print("Error")
         return None
     else:
         cnx.close()
         return None
 
- def InsertarUsuario(self, name,ape,correo,rol,contra):
+ def InsertarUsuario(name,ape,correo,rol,contra):
     try:
-        cnx = mysql.connector.connect(user='alejandro', password='Pass.123', database='db', host='127.0.0.1')
+        cnx = mysql.connector.connect(user='alejandro', password='Pass.123', database='EPS', host='127.0.0.1')
         cursor = cnx.cursor()
         now = datetime.now() #Obtiene la fecha actual
         # dd/mm/YY H:M:S

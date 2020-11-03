@@ -11,10 +11,10 @@ class mediClass:
     self.Nombre = Nombre
     self.descrip=descrip
     self.contraindica=contraindica
- def ObtenerMedicamento(self,nmed):
+ def ObtenerMedicamento(nmed):
   try:
    aux=False
-   cnx = mysql.connector.connect(user='alejandro', password = 'Pass.123', database='db',host='127.0.0.1')
+   cnx = mysql.connector.connect(user='alejandro', password = 'Pass.123', database='EPS',host='127.0.0.1')
    cursor = cnx.cursor()
    cursor.execute("select * from Medicamento where nombre_med='{}';".format(nmed))
    data = cursor.fetchone()
@@ -36,7 +36,7 @@ class mediClass:
       cnx.close()
       return None
 
- def InsertarMedicamento(self, name,descrip,contraindica):
+ def InsertarMedicamento(name,descrip,contraindica):
     try:
         cnx = mysql.connector.connect(user='alejandro', password='Pass.123', database='db', host='127.0.0.1')
         cursor = cnx.cursor()
@@ -58,7 +58,7 @@ class mediClass:
         cnx.close()
         return False
 
- def ActualizarMedicamento(self,name,descrip,contraindica):
+ def ActualizarMedicamento(name,descrip,contraindica):
   try:
    aux=False
    cnx = mysql.connector.connect(user='alejandro', password = 'Pass.123', database='db',host='127.0.0.1')
@@ -83,7 +83,7 @@ class mediClass:
   else:
     cnx.close()
 
-  def BorrarMedicamento(self, name):
+  def BorrarMedicamento(name):
       try:
           aux = False
           cnx = mysql.connector.connect(user='alejandro', password='Pass.123', database='db', host='127.0.0.1')
