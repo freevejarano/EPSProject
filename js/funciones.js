@@ -1,4 +1,4 @@
-const url = "cgi-bin/Proyecto/EPSProject";
+const url = "cgi-bin/EPSProject";
 
 //var nombre=$("#").val();
 //var nombre=$("#").val();
@@ -94,9 +94,8 @@ function registrarMed(medname,descp,cint) {
     let data = {
         "medname": medname,
         "descp": descp,
-        "lname": apellido,
-        "password": contrasenia,
-        "rol": 'Paciente'
+        "cint": cint,
+        "act": 'ins'
     }
     $.ajax({
         method: 'POST',
@@ -104,6 +103,84 @@ function registrarMed(medname,descp,cint) {
         dataType: 'json',
         success: function(rta) {
             response=JSON.parse(rta);
+            if(response.tipo==="OK"){
+                return 1
+            }
+            else{
+                alert("Error: "+response.mensaje)
+            }
+        },
+        error: function(response){
+            console.log(JSON.stringify(response))
+        }
+    }); 
+}
+
+function modificarMed(medname,descp,cint) {
+    let result;
+    let data = {
+        "medname": medname,
+        "descp": descp,
+        "cint": cint,
+        "act": 'upd'
+    }
+    $.ajax({
+        method: 'POST',
+        url: url + '/ControladorMedicamentos.py',
+        dataType: 'json',
+        success: function(rta) {
+            response=JSON.parse(rta);
+            if(response.tipo==="OK"){
+                return 1
+            }
+            else{
+                alert("Error: "+response.mensaje)
+            }
+        },
+        error: function(response){
+            console.log(JSON.stringify(response))
+        }
+    }); 
+}
+
+function eliminarMed(medname) {
+    let result;
+    let data = {
+        "medname": medname,
+        "act": 'del'
+    }
+    $.ajax({
+        method: 'POST',
+        url: url + '/ControladorMedicamentos.py',
+        dataType: 'json',
+        success: function(rta) {
+            response=JSON.parse(rta);
+            if(response.tipo==="OK"){
+                return 1
+            }
+            else{
+                alert("Error: "+response.mensaje)
+            }
+        },
+        error: function(response){
+            console.log(JSON.stringify(response))
+        }
+    }); 
+}
+
+function consultarMed(medname) {
+    let result;
+    let data = {
+        "medname": medname,
+        "act": 'del'
+    }
+    $.ajax({
+        method: 'POST',
+        url: url + '/ControladorMedicamentos.py',
+        dataType: 'json',
+        success: function(rta) {
+            response=JSON.parse(rta);
+            console.log(response)
             if(response.tipo==="OK"){
                 return 1
             }
