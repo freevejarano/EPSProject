@@ -1,5 +1,8 @@
-//Ir al menú Registrar
+//LOGIN-REGISTRO
+
+//Ir al menú Registrar desde el Login
 $("#Entrar").click(function() {
+    //Mover el menu
     $("#Registro").removeClass("animate__animated animate__backOutLeft");
     $("#login").removeClass("animate__backInRight");
     $("#login").addClass(" animate__backOutRight");
@@ -7,7 +10,7 @@ $("#Entrar").click(function() {
     $('#Registro').show();
 });
 
-//Ir al menú de Inicio
+//Ir al menú de Inicio desde el menu de Registrar 
 $("#Devolver").click(function() {
     $("#Registro").removeClass("animate__animated animate__backInLeft");
     $("#login").removeClass("animate__backOutRight");
@@ -15,7 +18,7 @@ $("#Devolver").click(function() {
     $("#login").addClass("animate__animated animate__backInRight");
 });
 
-//Guardar Datos
+//Registrar Usuario
 $("#Registrar").click(function() {
 
     //Recolectar Datos
@@ -29,7 +32,7 @@ $("#Registrar").click(function() {
     if (nombre == "" || apellido == "" || correo == "" || correo2 == "" || contrasenia == "") {
         swal("Error", "Por favor, Ingrese todos los datos", "error");
     } else if (correo == correo2 && correo.includes('@')) {
-        guardar(nombre, apellido, correo, contrasenia);
+        guardar(nombre, apellido, correo, contrasenia); //Llamado a funcion guardar
     } else if (!correo.includes('@')) {
         swal("Error", "Por favor, Ingrese un formato de correo válido", "error");
     } else {
@@ -37,12 +40,11 @@ $("#Registrar").click(function() {
     }
 });
 
+//Funcion para Registrar Usuario
 async function guardar(nombre, apellido, correo, contrasenia) {
+    //Envia los datos a la funcion crearCuenta ubicada en funciones.js
     var save = await crearCuenta(nombre, apellido, correo, contrasenia)
-    console.log(save)
-    alert("Bienvenido")
-    if (save == 1) {
-	console.log("yei")
+    if (save) { //Retorno True
         swal("Correcto", "¡Registro exitoso!", "success")
             .then((value) => {
                 $("#Registro").removeClass("animate__animated animate__backInLeft");
@@ -51,11 +53,10 @@ async function guardar(nombre, apellido, correo, contrasenia) {
                 $("#login").addClass("animate__animated animate__backInRight");
             });
 
-    } else if (save == 2) {
+    } else{ //Retorno False
         swal("Error", "Error en el registro", "error");
     }
 }
-
 
 //Iniciar Sesión
 $("#Ingresar").click(function() {
@@ -67,52 +68,24 @@ $("#Ingresar").click(function() {
     if (correo == "" || contrasenia == "") {
         swal("Error", "Por favor, Ingrese todos los datos", "error");
     } else {
-        Inicio(correo, contrasenia)
+        Inicio(correo, contrasenia) //Llamado a funcion Inicio
     }
 
 });
 
+//Funcion para Inciar Sesion
 async function Inicio(correo, contrasenia) {
+ //Recibe validacion de la funcion login ubicada en funciones.js
     var save = await login(correo, contrasenia);
-    if (save == 1) {
+    if (save) { //Retorno True
         swal("Correcto", "Bienvenido", "success")
 	mostrarPaginaPrincipal()
-    } else if (save == 2) {
-        swal("Error", "Datos erróneos", "error");
-    } else {
-        swal("Error", "Interno", "error")
+    } else { //Retorno False
+        swal("Error", "Datos erroneos", "error")
     }
 }
 
-function lgin(correo, contrasenia){
-    let  dat = {
-        email: correo,
-        password: contrasenia
-    }
-
-    $.ajax({
-        type: 'POST',
-        url: '/cgi-bin/EPSProject/ControladorLogin.py',
-        data: {"email":"val@val.com","password":"123"},
-        dataType: 'json',
-	//contentType: "application/json; charset=utf-8",
-        success: function(rta){
-            response=JSON.parse(rta);
-            if(response.tipo==="OK"){
-                return 1
-            }
-            else{
-                alert("Error: "+response.mensaje)
-                return 2
-            }
-        },
-        error: function(response){
-            console.log(response.mensaje)
-        }
-    });  
-}
-
-
+//ACCESO MENU MEDICAMENTOS
 function mostrarPaginaPrincipal() {
     $("#login").removeClass("animate__animated animate__backInLeft");
     $("#menu").removeClass("animate__backOutRight");
@@ -124,8 +97,8 @@ function mostrarPaginaPrincipal() {
 
 
 //MEDICAMENTOS
-
-//Ir al menú Crear
+//Se esconde el menu y se habilita el formulario deseado con su respectiva animacion
+//Ir al form Crear
 $("#Crear").click(function() {
     $("#crearmed").removeClass("animate__animated animate__backOutLeft");
     $("#menu").removeClass("animate__backInRight");
@@ -134,7 +107,7 @@ $("#Crear").click(function() {
     $('#crearmed').show();
 });
 
-//Ir al menú Modificar
+//Ir al form Modificar
 $("#Modificar").click(function() {
     $("#modmed").removeClass("animate__animated animate__backOutLeft");
     $("#menu").removeClass("animate__backInRight");
@@ -143,7 +116,7 @@ $("#Modificar").click(function() {
     $('#modmed').show();
 });
 
-//Ir al menú Consultar
+//Ir al form Consultar
 $("#Consultar").click(function() {
     $("#quemed").removeClass("animate__animated animate__backOutLeft");
     $("#menu").removeClass("animate__backInRight");
@@ -152,7 +125,7 @@ $("#Consultar").click(function() {
     $('#quemed').show();
 });
 
-//Ir al menú Eliminar
+//Ir al form  Eliminar
 $("#Eliminar").click(function() {
     $("#delmed").removeClass("animate__animated animate__backOutLeft");
     $("#menu").removeClass("animate__backInRight");
@@ -161,7 +134,8 @@ $("#Eliminar").click(function() {
     $('#delmed').show();
 });
 
-//Ir al menú 
+//Ir al menú Central de Medicamentos
+//Se declaran fucniones para el llamado posterior. Cierra el formualrio y se devuelve al menu principal 
 
 function DevolverCrearMed() {
     $("#crearmed").removeClass("animate__animated animate__backInLeft");
@@ -191,15 +165,14 @@ function DevolverConMed() {
     $("#menu").addClass("animate__animated animate__backInRight");
 }
 
+//Asignacion de funciones a las acciones de los botones 
 $("#DevolverMed").click(function() {
     DevolverCrearMed()
-
 });
 
 $("#DevolverMedM").click(function() {
     DevolverModMed()
 });
-
 
 $("#DevolverMedD").click(function() {
     DevolverEliMed()
@@ -209,7 +182,7 @@ $("#DevolverMedQ").click(function() {
     DevolverConMed()
 });
 
-//Guardar Datos
+//Registrar Medicamento
 $("#RegistrarMed").click(function() {
 
     //Recolectar Datos
@@ -225,15 +198,17 @@ $("#RegistrarMed").click(function() {
     }
 });
 
+//Funcion para el registro
 async function guardarMed(name, des, cint) {
+ //Recibe validacion de la funcion registrarMed ubicada en funciones.js
     var save = await registrarMed(name, des, cint)
-    if (save == 1) {
+    if (save) { //Retorno True
         swal("Correcto", "¡Registro exitoso!", "success")
             .then((value) => {
                 DevolverCrearMed()
             });
 
-    } else if (save == 2) {
+    } else { //Retorno False
         swal("Error", "Error en el registro", "error");
     }
 }
@@ -256,14 +231,15 @@ $("#ModMed").click(function() {
 });
 
 async function modMed(name, des, cint) {
+//Recibe validacion de la funcion modificarMed ubicada en funciones.js
     var save = await modificarMed(name, des, cint)
-    if (save == 1) {
+    if (save) { //Retorno True
         swal("Correcto", "¡Actualización exitosa!", "success")
             .then((value) => {
                 DevolverModMed()
             });
 
-    } else if (save == 2) {
+    } else{ //Retorno False
         swal("Error", "Error en el modificar", "error");
     }
 }
@@ -283,11 +259,12 @@ $("#DelMed").click(function() {
 });
 
 async function delMed(name, des, cint) {
+//Recibe validacion de la funcion eliminarMed ubicada en funciones.js
     var save = await eliminarMed(name, des, cint)
-    if (save == 1) {
+    if (save) { //Retorno True
         swal("Correcto", "¡Se ha borrado el medicamento", "success")
         DevolverEliMed()
-    } else if (save == 2) {
+    } else { //Retorno False
         swal("Error", "Error, no se ha encontrado el medicamento", "error");
     }
 }
@@ -308,10 +285,11 @@ $("#QueMed").click(function() {
 });
 
 async function consulMed(name) {
-    var save = await cosnultarMed(name)
-    if (save == 1) {
+//Recibe validacion de la funcion consultarMed ubicada en funciones.js
+    var save = await consultarMed(name)
+    if (save) {
 	console.log("si")
-    } else if (save == 2) {
+    } else { //Retorno False
         swal("Error", "Error, no se ha encontrado el medicamento", "error");
     }
 }

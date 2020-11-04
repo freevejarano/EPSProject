@@ -1,32 +1,28 @@
 const ur= "http://ec2-34-227-90-132.compute-1.amazonaws.com/";
 const url = "/cgi-bin/EPSProject";
 
-
-
-
+// Registrar Usuario
 function crearCuenta(nombre, apellido, correo, contrasenia) {
-    let result;
+    //Almecena los datos en JSON
     var obj = {
         "email": correo,
         "fname": nombre,
         "lname": apellido,
         "password": contrasenia,
         "rol": 'Operario'
-    };
+    }; //Envio de datos por AJAX con metodo POST
     $.ajax({
         method: 'POST',
         url: url + '/ControladorRegistro.py',
         dataType: 'json',
 	data: obj,
         success: function(rta) {
-            //response=JSON.parse(rta); 
-	    console.log(rta)
-            if(response.tipo==="OK"){
-		console.log(response.mensaje)
-                return 1
+            response=JSON.parse(rta); 
+            if(response.tipo==="OK"){ //Autenticacion de tipo 
+               //Envio de True
             }
             else{
-                alert("Error: "+response.mensaje)
+                alert("Error: "+response.mensaje) //Envio de False
             }
         },
         error: function(response){
@@ -35,25 +31,27 @@ function crearCuenta(nombre, apellido, correo, contrasenia) {
     });
 }
 
+// Inciar Sesion
 function login(correo, contrasenia){
+ //Almecena los datos en JSON
     var  obj = {
         "email": correo,
         "password": contrasenia
-    };
+    }; //Envio de datos por AJAX con metodo POST
     $.ajax({
 	method: 'POST',
-        url: url + '/ControladorLogin.py',
-        dataType: 'json',
+        url: url + '/ControladorLogin.py', //Ruta Especificada 
+        dataType: 'json', //Tipo de dato 
 	data: obj,
     	success: function(rta) {
 	console.log(rta)
             response=JSON.parse(rta);
             if(response.tipo==="OK"){
-                return 1
+                 //Envio de True
             }
             else{
                 alert("Error: "+response.mensaje)
-		return 2
+		//Envio de False
             }
         },
         error: function(response){
@@ -63,26 +61,26 @@ function login(correo, contrasenia){
     });
 }
 
+// Registrar Medicamento
 function registrarMed(medname,descp,cint) {
-    let result;
     var dat = {
         "medname": medname,
         "descp": descp,
         "cint": cint,
         "act": 'ins'
-    }
-    $.ajax({
+    };
+    $.ajax({ //Envio de datos por AJAX con metodo POST
         method: 'POST',
-        url: url + '/ControlaMedicamentos.py',
+        url: url + '/ControlaMedicamentos.py', //Ruta Especificada 
 	data: dat,
         dataType: 'json',
         success: function(rta) {
             response=JSON.parse(rta);
             if(response.tipo==="OK"){
-                return 1
+                //Envio de True
             }
             else{
-                alert("Error: "+response.mensaje)
+                alert("Error: "+response.mensaje) //Envio de False
             }
         },
         error: function(response){
@@ -92,25 +90,24 @@ function registrarMed(medname,descp,cint) {
 }
 
 function modificarMed(medname,descp,cint) {
-    let result;
     var dat = {
         "medname": medname,
         "descp": descp,
         "cint": cint,
         "act": 'upd'
-    }
+    };//Envio de datos por AJAX con metodo POST
     $.ajax({
         method: 'POST',
-        url: url + '/ControladorMedicamentos.py',
+        url: url + '/ControladorMedicamentos.py', //Ruta Especificada 
 	data: dat,
         dataType: 'json',	
         success: function(rta) {
             response=JSON.parse(rta);
             if(response.tipo==="OK"){
-                return 1
+                 //Envio de True
             }
             else{
-                alert("Error: "+response.mensaje)
+                alert("Error: "+response.mensaje) //Envio de False
             }
         },
         error: function(response){
@@ -120,23 +117,22 @@ function modificarMed(medname,descp,cint) {
 }
 
 function eliminarMed(medname) {
-    let result;
     var dat = {
         "medname": medname,
         "act": 'del'
-    }
+    };//Envio de datos por AJAX con metodo POST
     $.ajax({
         method: 'POST',
-        url: url + '/ControladorMedicamentos.py',
+        url: url + '/ControladorMedicamentos.py', //Ruta Especificada 
 	data: dat,
         dataType: 'json',
         success: function(rta) {
             response=JSON.parse(rta);
             if(response.tipo==="OK"){
-                return 1
+                //Envio de True
             }
             else{
-                alert("Error: "+response.mensaje)
+                alert("Error: "+response.mensaje) //Envio de False
             }
         },
         error: function(response){
@@ -146,28 +142,27 @@ function eliminarMed(medname) {
 }
 
 function consultarMed(medname) {
-    let result;
     var dat = {
         "medname": medname,
         "act": 'del'
-    }
+    };//Envio de datos por AJAX con metodo POST
     $.ajax({
         method: 'POST',
-        url: url + '/ControladorMedicamentos.py',
+        url: url + '/ControladorMedicamentos.py', //Ruta Especificada 
 	data: dat,
         dataType: 'json',
         success: function(rta) {
             response=JSON.parse(rta);
             console.log(response)
             if(response.tipo==="OK"){
-                return 1
+                //Envio de True
             }
             else{
                 alert("Error: "+response.mensaje)
             }
         },
         error: function(response){
-            console.log(JSON.stringify(response))
+            console.log(JSON.stringify(response))  //Envio de False
         }
     }); 
 }
