@@ -38,7 +38,7 @@ class mediClass:
 
  def InsertarMedicamento(name,descrip,contraindica):
     try:
-        cnx = mysql.connector.connect(user='alejandro', password='Pass.123', database='db', host='127.0.0.1')
+        cnx = mysql.connector.connect(user='alejandro', password='Pass.123', database='EPS', host='127.0.0.1')
         cursor = cnx.cursor()
         cursor.execute("insert into Medicamentos (nombre_med,descripcion_med,contraindicaciones_med) "
                        " value('{}','{}','{}');".format(name, descrip, contraindica)); #Sentencia SQL
