@@ -39,7 +39,10 @@ $("#Registrar").click(function() {
 
 async function guardar(nombre, apellido, correo, contrasenia) {
     var save = await crearCuenta(nombre, apellido, correo, contrasenia)
+    console.log(save)
+    alert("Bienvenido")
     if (save == 1) {
+	console.log("yei")
         swal("Correcto", "¡Registro exitoso!", "success")
             .then((value) => {
                 $("#Registro").removeClass("animate__animated animate__backInLeft");
@@ -70,7 +73,7 @@ $("#Ingresar").click(function() {
 });
 
 async function Inicio(correo, contrasenia) {
-    var save = await lgin(correo, contrasenia);
+    var save = await login(correo, contrasenia);
     if (save == 1) {
         swal("Correcto", "Bienvenido", "success")
 	mostrarPaginaPrincipal()

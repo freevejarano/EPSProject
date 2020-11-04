@@ -19,8 +19,8 @@ function crearCuenta(nombre, apellido, correo, contrasenia) {
         dataType: 'json',
 	data: obj,
         success: function(rta) {
-            //response=JSON.parse(rta); 
-	    console.log(rta)
+            response=JSON.parse(rta); 
+	    console.log(response)
             if(response.tipo==="OK"){
 		console.log(response.mensaje)
                 return 1
@@ -46,8 +46,8 @@ function login(correo, contrasenia){
         dataType: 'json',
 	data: obj,
     	success: function(rta) {
-	console.log(rta)
-            response=JSON.parse(rta);
+        	console.log(rta); 
+	   //response=JSON.parse(rta);
             if(response.tipo==="OK"){
                 return 1
             }
