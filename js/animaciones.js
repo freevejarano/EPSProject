@@ -291,7 +291,7 @@ async function delMed(name, des, cint) {
 
 
 //Consultar Medicamentos
-$("#ModMed").click(function() {
+$("#QueMed").click(function() {
 
     //Recolectar Datos
     name = $("#medname").val();
