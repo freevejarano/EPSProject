@@ -11,11 +11,7 @@ print('')
 usuario=us.ObtenerUsuario(datos.getvalue('email'),datos.getvalue('password'))
 
 if usuario is not None:
-    print(json.dumps('{"tipo":"OK","mensaje":"Bienvenido"}"'))
+    print(json.dumps('{"tipo":"OK","mensaje":"Bienvenido"}'))
 else:
     print(json.dumps('{"tipo":"error","mensaje":"Usuario o contrasena inválidos"}'))
-   # z='{"error":"'
-   # w=datos.getvalue('email')
-   # x=datos.getvalue('password')
-   # a=z+w+x+'"}'
-   # print(json.dumps(a))
+    
