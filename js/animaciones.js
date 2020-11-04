@@ -90,7 +90,7 @@ function lgin(correo, contrasenia){
     $.ajax({
         type: 'POST',
         url: '/cgi-bin/EPSProject/ControladorLogin.py',
-        data: JSON.stringify(dat),
+        data: {"email":"val@val.com","password":"123"},
         dataType: 'json',
 	//contentType: "application/json; charset=utf-8",
         success: function(rta){
@@ -104,7 +104,7 @@ function lgin(correo, contrasenia){
             }
         },
         error: function(response){
-            console.log(response)
+            console.log(response.mensaje)
         }
     });  
 }
