@@ -17,18 +17,19 @@ function crearCuenta(nombre, apellido, correo, contrasenia) {
         dataType: 'json',
 	data: obj,
         success: function(rta) {
-            response=JSON.parse(rta); 
-            if(response.tipo==="OK"){ //Autenticacion de tipo 
-               //Envio de True
+            console.log(rta)
+            response=JSON.parse(rta);
+            console.log(response)
+            if(response.tipo==="OK"){ //Autenticacion de tipo
+                vista1(1)
+            }else{
+               vista1(2)
             }
-            else{
-                alert("Error: "+response.mensaje) //Envio de False
-            }
-        },
-        error: function(response){
-            console.log(JSON.stringify(response))
-        }
-    });
+      },
+      error: function(response){
+      console.log(JSON.stringify(response))
+    }
+   });
 }
 
 // Inciar Sesion
@@ -41,16 +42,16 @@ function login(correo, contrasenia){
     $.ajax({
 	method: 'POST',
         url: url + '/ControladorLogin.py', //Ruta Especificada 
-        dataType: 'json', //Tipo de dato 
+        dataType: 'json', //Tipo de dato
 	data: obj,
     	success: function(rta) {
 	console.log(rta)
             response=JSON.parse(rta);
             if(response.tipo==="OK"){
-                 //Envio de True
+               vista2(1)
             }
             else{
-                alert("Error: "+response.mensaje)
+                vista2(2)
 		//Envio de False
             }
         },
@@ -72,21 +73,24 @@ function registrarMed(medname,descp,cint) {
     $.ajax({ //Envio de datos por AJAX con metodo POST
         method: 'POST',
         url: url + '/ControlaMedicamentos.py', //Ruta Especificada 
-	data: dat,
         dataType: 'json',
+	data: dat,
         success: function(rta) {
+	    console.log(rta)
             response=JSON.parse(rta);
+   	    console.log(response)
             if(response.tipo==="OK"){
-                //Envio de True
+                vista3(1)
             }
             else{
+		vista3(2)
                 alert("Error: "+response.mensaje) //Envio de False
             }
         },
         error: function(response){
             console.log(JSON.stringify(response))
         }
-    }); 
+    });
 }
 
 function modificarMed(medname,descp,cint) {
@@ -98,22 +102,24 @@ function modificarMed(medname,descp,cint) {
     };//Envio de datos por AJAX con metodo POST
     $.ajax({
         method: 'POST',
-        url: url + '/ControladorMedicamentos.py', //Ruta Especificada 
+        url: url + '/ControlaMedicamentos.py', //Ruta Especificada 
 	data: dat,
-        dataType: 'json',	
+        dataType: 'json',
+
         success: function(rta) {
             response=JSON.parse(rta);
             if(response.tipo==="OK"){
-                 //Envio de True
+                 vista4(1)
             }
             else{
+		vista4(2)
                 alert("Error: "+response.mensaje) //Envio de False
             }
         },
         error: function(response){
             console.log(JSON.stringify(response))
         }
-    }); 
+    });
 }
 
 function eliminarMed(medname) {
@@ -123,46 +129,50 @@ function eliminarMed(medname) {
     };//Envio de datos por AJAX con metodo POST
     $.ajax({
         method: 'POST',
-        url: url + '/ControladorMedicamentos.py', //Ruta Especificada 
+        url: url + '/ControlaMedicamentos.py', //Ruta Especificada 
 	data: dat,
         dataType: 'json',
         success: function(rta) {
             response=JSON.parse(rta);
             if(response.tipo==="OK"){
-                //Envio de True
+       		vista5(1)
             }
             else{
+		vista5(2)
                 alert("Error: "+response.mensaje) //Envio de False
             }
         },
         error: function(response){
             console.log(JSON.stringify(response))
         }
-    }); 
+    });
 }
 
 function consultarMed(medname) {
     var dat = {
         "medname": medname,
-        "act": 'del'
+        "act": 'cons'
     };//Envio de datos por AJAX con metodo POST
     $.ajax({
         method: 'POST',
-        url: url + '/ControladorMedicamentos.py', //Ruta Especificada 
+        url: url + '/ControlaMedicamentos.py', //Ruta Especificada 
 	data: dat,
         dataType: 'json',
         success: function(rta) {
-            response=JSON.parse(rta);
-            console.log(response)
-            if(response.tipo==="OK"){
-                //Envio de True
-            }
-            else{
-                alert("Error: "+response.mensaje)
-            }
+	   if(rta.Nombre===undefined){
+             $("#medname3").val("")
+             $("#descp3").val("")
+             $("#cint3").val("")
+
+		vista6(2)
+	   }else{ 
+             $("#medname3").val(rta.Nombre)
+             $("#descp3").val(rta.Desc)
+             $("#cint3").val(rta.Contra)
+	}
         },
         error: function(response){
             console.log(JSON.stringify(response))  //Envio de False
         }
-    }); 
+    });
 }

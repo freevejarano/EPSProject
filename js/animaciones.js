@@ -44,18 +44,21 @@ $("#Registrar").click(function() {
 async function guardar(nombre, apellido, correo, contrasenia) {
     //Envia los datos a la funcion crearCuenta ubicada en funciones.js
     var save = await crearCuenta(nombre, apellido, correo, contrasenia)
-    if (save) { //Retorno True
-        swal("Correcto", "¡Registro exitoso!", "success")
+}
+
+
+function vista1(save){
+      if(save==1){
+         swal("Correcto","¡Registro Exitoso!","success")
             .then((value) => {
                 $("#Registro").removeClass("animate__animated animate__backInLeft");
                 $("#login").removeClass("animate__backOutRight");
                 $("#Registro").addClass("animate__animated animate__backOutLeft");
                 $("#login").addClass("animate__animated animate__backInRight");
             });
-
-    } else{ //Retorno False
-        swal("Error", "Error en el registro", "error");
-    }
+       }else{
+        swal("Error","Registro Fallido","error")
+       }
 }
 
 //Iniciar Sesión
@@ -77,7 +80,10 @@ $("#Ingresar").click(function() {
 async function Inicio(correo, contrasenia) {
  //Recibe validacion de la funcion login ubicada en funciones.js
     var save = await login(correo, contrasenia);
-    if (save) { //Retorno True
+}
+
+function vista2(save){
+    if (save==1) { 
         swal("Correcto", "Bienvenido", "success")
 	mostrarPaginaPrincipal()
     } else { //Retorno False
@@ -91,6 +97,7 @@ function mostrarPaginaPrincipal() {
     $("#menu").removeClass("animate__backOutRight");
     $("#login").addClass("animate__animated animate__backOutLeft");
     $("#menu").addClass("animate__animated animate__backInRight");
+    $('#Contenido').show();
     $('#menu').show();
     $('#fondo').hide();
 }
@@ -202,7 +209,10 @@ $("#RegistrarMed").click(function() {
 async function guardarMed(name, des, cint) {
  //Recibe validacion de la funcion registrarMed ubicada en funciones.js
     var save = await registrarMed(name, des, cint)
-    if (save) { //Retorno True
+}
+
+function vista3(save){
+    if (save==1) { //Retorno True
         swal("Correcto", "¡Registro exitoso!", "success")
             .then((value) => {
                 DevolverCrearMed()
@@ -218,9 +228,9 @@ async function guardarMed(name, des, cint) {
 $("#ModMed").click(function() {
 
     //Recolectar Datos
-    name = $("#medname").val();
-    des = $("#descp").val();
-    cint = $("#cint").val();
+    name = $("#medname1").val();
+    des = $("#descp1").val();
+    cint = $("#cint1").val();
 
     //Verificar datos
     if (name == "" || des == "" || cint == "") {
@@ -233,7 +243,9 @@ $("#ModMed").click(function() {
 async function modMed(name, des, cint) {
 //Recibe validacion de la funcion modificarMed ubicada en funciones.js
     var save = await modificarMed(name, des, cint)
-    if (save) { //Retorno True
+}
+function vista4(save){    
+   if (save==1) { //Retorno True
         swal("Correcto", "¡Actualización exitosa!", "success")
             .then((value) => {
                 DevolverModMed()
@@ -248,7 +260,7 @@ async function modMed(name, des, cint) {
 $("#DelMed").click(function() {
 
     //Recolectar Datos
-    name = $("#medname").val();
+    name = $("#medname2").val();
 
     //Verificar datos
     if (name == "") {
@@ -261,7 +273,9 @@ $("#DelMed").click(function() {
 async function delMed(name, des, cint) {
 //Recibe validacion de la funcion eliminarMed ubicada en funciones.js
     var save = await eliminarMed(name, des, cint)
-    if (save) { //Retorno True
+}   
+function vista5(save){
+  if (save==1) { //Retorno True
         swal("Correcto", "¡Se ha borrado el medicamento", "success")
         DevolverEliMed()
     } else { //Retorno False
@@ -274,7 +288,7 @@ async function delMed(name, des, cint) {
 $("#QueMed").click(function() {
 
     //Recolectar Datos
-    name = $("#medname").val();
+    name = $("#medname3").val();
 
     //Verificar datos
     if (name == "") {
@@ -287,7 +301,9 @@ $("#QueMed").click(function() {
 async function consulMed(name) {
 //Recibe validacion de la funcion consultarMed ubicada en funciones.js
     var save = await consultarMed(name)
-    if (save) {
+}   
+function vista6(save){
+ if (save==1) {
 	console.log("si")
     } else { //Retorno False
         swal("Error", "Error, no se ha encontrado el medicamento", "error");
