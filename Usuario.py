@@ -52,6 +52,19 @@ class usuarioClass:
         cursor.execute("insert into Usuario (nombre_Usuario,apellido_Usuario,correo_Usuario, rol_Usuario,contrasenia,ultima_conexion)"
                        " value('{}','{}','{}','{}',sha('{}'),'{}');".format(name, ape, correo, rol, contra, fecha)); #Sentencia SQL
         cnx.commit()
+        if rol=="Paciente":
+            cursor.execute("insert into Pacientes (nombre_Paciente,apellido_Paciente,correo_Paciente,contrasenia,ultima_conexion)"
+                           "value ('{}','{}','{}',sha('{}'),'{}');".format(name, ape, correo, contra,fecha));  # Sentencia SQL
+            cnx.commit()
+        elif rol=="Doctores":
+            cursor.execute("insert into Doctores (Sedes_cod_sede,nombre_Doc, apellido_Doc, correo_Doc,contrasenia,ultima_conexion) "
+                           "value (1,'{}','{}','{}',sha('{}'),'{}');".format(name, ape, correo, contra,fecha))
+            cnx.commit()
+        elif rol=="Operario":
+            cursor.execute("insert into Operarios (Sedes_cod_sede,nombre_Operario,apellido_Operario,correo_Operario,contrasenia,ultima_conexion) "
+                           "value(1,'{}','{}','{}',sha('{}'),'{}');".format(name, ape, correo, contra,fecha))
+            cnx.commit()
+
         cursor.close()
         return True
     except mysql.connector.Error as err:
