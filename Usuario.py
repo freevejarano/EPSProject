@@ -15,7 +15,8 @@ class usuarioClass:
  def ObtenerUsuario(correo1, contrasenia1):
     try: #Consulta Usuario 
         aux=False
-        cnx = mysql.connector.connect(user='val', password = 'Abc.123.', database='EPS',host='127.0.0.1')
+        #cnx = mysql.connector.connect(user='val', password = 'Abc.123.', database='EPS',host='127.0.0.1')
+        cnx = mysql.connector.connect(user='alejandro', password='Pass.123', database='db', host='127.0.0.1')
         cursor = cnx.cursor()
         cursor.execute("select * from Usuario where correo_Usuario='{}' and contrasenia=sha('{}');".format(correo1,contrasenia1))
         data = cursor.fetchone()
@@ -42,7 +43,8 @@ class usuarioClass:
 
  def InsertarUsuario(name,ape,correo,rol,contra):
     try: #Insercion de Usuario
-        cnx = mysql.connector.connect(user='val', password='Abc.123.', database='EPS', host='127.0.0.1')
+        #cnx = mysql.connector.connect(user='val', password='Abc.123.', database='EPS', host='127.0.0.1')
+        cnx = mysql.connector.connect(user='alejandro', password='Pass.123', database='db', host='127.0.0.1')
         cursor = cnx.cursor()
         now = datetime.now() #Obtiene la fecha actual
         # dd/mm/YY H:M:S

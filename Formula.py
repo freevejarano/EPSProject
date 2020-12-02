@@ -25,7 +25,8 @@ class formulaClass:
 #Funciones con conexion a la base de datos para el manejo de estos
  def ObtenerFormula(nPac):
   try: #Consulta Formula
-   cnx = mysql.connector.connect(user='val', password = 'Abc.123.', database='EPS',host='127.0.0.1')
+   #cnx = mysql.connector.connect(user='val', password = 'Abc.123.', database='EPS',host='127.0.0.1')
+   cnx = mysql.connector.connect(user='alejandro', password='Pass.123', database='db', host='127.0.0.1')
    cursor = cnx.cursor()
    cursor.execute("select Pacientes.nombre_Paciente, Medicamentos.nombre_med,"
                   "Formula_Medicamentos.cantidad, Formula_Medicamentos.descripcion "
@@ -58,7 +59,8 @@ class formulaClass:
 
  def InsertarFormula(self, nDoc, nPac):
     try: #Insercion de Formula
-        cnx = mysql.connector.connect(user='val', password='Abc.123.', database='EPS', host='127.0.0.1')
+        #cnx = mysql.connector.connect(user='val', password='Abc.123.', database='EPS', host='127.0.0.1')
+        cnx = mysql.connector.connect(user='alejandro', password='Pass.123', database='db', host='127.0.0.1')
         cursor = cnx.cursor()
         cursor.execute("select * from Doctores where nombre_Doc='{}';".format(nDoc))
         data = cursor.fetchone()
@@ -95,7 +97,8 @@ class formulaClass:
  def ActualizarFormula(nameM,cant,descp,nameP):
   try: #Modificacion Formula
    aux=False
-   cnx = mysql.connector.connect(user='val', password = 'Abc.123.', database='EPS',host='127.0.0.1')
+   #cnx = mysql.connector.connect(user='val', password = 'Abc.123.', database='EPS',host='127.0.0.1')
+   cnx = mysql.connector.connect(user='alejandro', password='Pass.123', database='db', host='127.0.0.1')
    cursor = cnx.cursor()
    cursor.execute("update Formula_Medicamentos, Medicamentos, Pacientes, Formula set Medicamentos.nombre_Med='{}',"
                   "Formula_Medicamentos.cantidad={}, Formula_Medicamentos.descripcion='{}'"
@@ -125,7 +128,8 @@ class formulaClass:
  def BorrarFormula(name):
       try: #Eliminacion Medicamento
           aux = False
-          cnx = mysql.connector.connect(user='val', password='Abc.123.', database='EPS', host='127.0.0.1')
+          #cnx = mysql.connector.connect(user='val', password='Abc.123.', database='EPS', host='127.0.0.1')
+          cnx = mysql.connector.connect(user='alejandro', password='Pass.123', database='db', host='127.0.0.1')
           cursor = cnx.cursor()
           cursor.execute("select Formula.id_Formula, Pacientes.nombre_Paciente"
                          "from Pacientes,Formula, Formula_Medicamentos"

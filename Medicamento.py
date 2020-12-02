@@ -15,7 +15,8 @@ class mediClass:
  def ObtenerMedicamento(nmed): 
   try: #Consulta Medicamento
    aux=False
-   cnx = mysql.connector.connect(user='val', password = 'Abc.123.', database='EPS',host='127.0.0.1')
+   #cnx = mysql.connector.connect(user='val', password = 'Abc.123.', database='EPS',host='127.0.0.1')
+   cnx = mysql.connector.connect(user='alejandro', password='Pass.123', database='db', host='127.0.0.1')
    cursor = cnx.cursor()
    cursor.execute("select * from Medicamentos where nombre_med='{}';".format(nmed))
    data = cursor.fetchone()
@@ -39,7 +40,8 @@ class mediClass:
 
  def InsertarMedicamento(self):
     try: #Insercion de Medicamento
-        cnx = mysql.connector.connect(user='val', password='Abc.123.', database='EPS', host='127.0.0.1')
+        #cnx = mysql.connector.connect(user='val', password='Abc.123.', database='EPS', host='127.0.0.1')
+        cnx = mysql.connector.connect(user='alejandro', password='Pass.123', database='db', host='127.0.0.1')
         cursor = cnx.cursor()
         cursor.execute("insert into Medicamentos (nombre_med,descripcion_med,contraindicaciones_med) "
                        " value('{}','{}','{}');".format(self.Nombre,self.descrip,self.contraindica)); #Sentencia SQL
@@ -62,7 +64,8 @@ class mediClass:
  def ActualizarMedicamento(name,descrip,contraindica):
   try: #Modificacion Medicamento
    aux=False
-   cnx = mysql.connector.connect(user='val', password = 'Abc.123.', database='EPS',host='127.0.0.1')
+   #cnx = mysql.connector.connect(user='val', password = 'Abc.123.', database='EPS',host='127.0.0.1')
+   cnx = mysql.connector.connect(user='alejandro', password='Pass.123', database='db', host='127.0.0.1')
    cursor = cnx.cursor()
    cursor.execute("UPDATE Medicamentos SET descripcion_med= '{}', contraindicaciones_med= '{}' WHERE nombre_med = '{}';".format(descrip,contraindica,name))
    cnx.commit()
@@ -87,7 +90,8 @@ class mediClass:
  def BorrarMedicamento(name):
       try: #Eliminacion Medicamento  
           aux = False
-          cnx = mysql.connector.connect(user='val', password='Abc.123.', database='EPS', host='127.0.0.1')
+          #cnx = mysql.connector.connect(user='val', password='Abc.123.', database='EPS', host='127.0.0.1')
+          cnx = mysql.connector.connect(user='alejandro', password='Pass.123', database='db', host='127.0.0.1')
           cursor = cnx.cursor()
           cursor.execute("DELETE FROM Medicamentos WHERE nombre_med='{}';".format(name))
           cnx.commit()
