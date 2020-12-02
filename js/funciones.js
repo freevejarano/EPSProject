@@ -2,20 +2,20 @@ const ur= "http://ec2-34-227-90-132.compute-1.amazonaws.com/";
 const url = "/cgi-bin/EPSProject";
 
 // Registrar Usuario
-function crearCuenta(nombre, apellido, correo, contrasenia) {
+function crearCuenta(nombre, apellido, rol, correo, contrasenia) {
     //Almecena los datos en JSON
     var obj = {
         "email": correo,
         "fname": nombre,
         "lname": apellido,
         "password": contrasenia,
-        "rol": 'Operario'
+        "rol": rol
     }; //Envio de datos por AJAX con metodo POST
     $.ajax({
         method: 'POST',
         url: url + '/ControladorRegistro.py',
         dataType: 'json',
-    data: obj,
+        data: obj,
         success: function(rta) {
             response=JSON.parse(rta); 
             if(response.tipo==="OK"){ //Autenticacion de tipo 

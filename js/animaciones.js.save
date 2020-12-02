@@ -24,16 +24,16 @@ $("#Registrar").click(function() {
     //Recolectar Datos
     nombre = $("#nombre").val();
     apellido = $("#apellido").val();
-    rol = $("#rol").val();
-    correo = $("#email").val();
+    rol= = "
+    correo = $("#email").val();	
     correo2 = $("#verifyemail").val();
     contrasenia = $("#pass").val();
 
     //Verificar datos
-    if (nombre == "" || apellido == "" || rol == "" || correo == "" || correo2 == "" || contrasenia == "") {
+    if (nombre == "" || apellido == "" || correo == "" || correo2 == "" || contrasenia == "") {
         swal("Error", "Por favor, Ingrese todos los datos", "error");
     } else if (correo == correo2 && correo.includes('@')) {
-        guardar(nombre, apellido, rol, correo, contrasenia); //Llamado a funcion guardar
+        guardar(nombre, apellido, correo, contrasenia); //Llamado a funcion guardar
     } else if (!correo.includes('@')) {
         swal("Error", "Por favor, Ingrese un formato de correo válido", "error");
     } else {
@@ -42,9 +42,9 @@ $("#Registrar").click(function() {
 });
 
 //Funcion para Registrar Usuario
-async function guardar(nombre, apellido, rol, correo, contrasenia) {
+async function guardar(nombre, apellido, correo, contrasenia) {
     //Envia los datos a la funcion crearCuenta ubicada en funciones.js
-    var save = await crearCuenta(nombre, apellido, rol, correo, contrasenia)
+    var save = await crearCuenta(nombre, apellido, correo, contrasenia)
     if (save) { //Retorno True
         swal("Correcto", "¡Registro exitoso!", "success")
             .then((value) => {
@@ -55,15 +55,7 @@ async function guardar(nombre, apellido, rol, correo, contrasenia) {
             });
 
     } else { //Retorno False
-        //swal("Error", "Error en el registro", "error");
-	swal("Correcto", "¡Registro exitoso!", "success")
-            .then((value) => {
-                $("#Registro").removeClass("animate__animated animate__backInLeft");
-                $("#login").removeClass("animate__backOutRight");
-                $("#Registro").addClass("animate__animated animate__backOutLeft");
-                $("#login").addClass("animate__animated animate__backInRight");
-            });
-
+        swal("Error", "Error en el registro", "error");
     }
 }
 
@@ -90,10 +82,7 @@ async function Inicio(correo, contrasenia) {
         swal("Correcto", "Bienvenido", "success")
         mostrarPaginaPrincipal()
     } else { //Retorno False
-        //swal("Error", "Datos erroneos", "error")
-	swal("Correcto", "Bienvenido", "success")
-        mostrarPaginaPrincipal()
-
+        swal("Error", "Datos erroneos", "error")
     }
 }
 
