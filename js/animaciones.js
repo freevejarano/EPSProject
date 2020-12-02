@@ -24,16 +24,15 @@ $("#Registrar").click(function() {
     //Recolectar Datos
     nombre = $("#nombre").val();
     apellido = $("#apellido").val();
-    rol = $("#rol").val();
     correo = $("#email").val();
     correo2 = $("#verifyemail").val();
     contrasenia = $("#pass").val();
 
     //Verificar datos
-    if (nombre == "" || apellido == "" || rol == "" || correo == "" || correo2 == "" || contrasenia == "") {
+    if (nombre == "" || apellido == "" || correo == "" || correo2 == "" || contrasenia == "") {
         swal("Error", "Por favor, Ingrese todos los datos", "error");
     } else if (correo == correo2 && correo.includes('@')) {
-        guardar(nombre, apellido, rol, correo, contrasenia); //Llamado a funcion guardar
+        guardar(nombre, apellido, correo, contrasenia); //Llamado a funcion guardar
     } else if (!correo.includes('@')) {
         swal("Error", "Por favor, Ingrese un formato de correo válido", "error");
     } else {
@@ -42,29 +41,24 @@ $("#Registrar").click(function() {
 });
 
 //Funcion para Registrar Usuario
-async function guardar(nombre, apellido, rol, correo, contrasenia) {
+async function guardar(nombre, apellido, correo, contrasenia) {
     //Envia los datos a la funcion crearCuenta ubicada en funciones.js
-    var save = await crearCuenta(nombre, apellido, rol, correo, contrasenia)
-    if (save) { //Retorno True
-        swal("Correcto", "¡Registro exitoso!", "success")
+    var save = await crearCuenta(nombre, apellido, correo, contrasenia)
+}
+
+
+function vista1(save){
+      if(save==1){
+         swal("Correcto","¡Registro Exitoso!","success")
             .then((value) => {
                 $("#Registro").removeClass("animate__animated animate__backInLeft");
                 $("#login").removeClass("animate__backOutRight");
                 $("#Registro").addClass("animate__animated animate__backOutLeft");
                 $("#login").addClass("animate__animated animate__backInRight");
             });
-
-    } else { //Retorno False
-        //swal("Error", "Error en el registro", "error");
-	swal("Correcto", "¡Registro exitoso!", "success")
-            .then((value) => {
-                $("#Registro").removeClass("animate__animated animate__backInLeft");
-                $("#login").removeClass("animate__backOutRight");
-                $("#Registro").addClass("animate__animated animate__backOutLeft");
-                $("#login").addClass("animate__animated animate__backInRight");
-            });
-
-    }
+       }else{
+        swal("Error","Registro Fallido","error")
+       }
 }
 
 //Iniciar Sesión
@@ -84,43 +78,28 @@ $("#Ingresar").click(function() {
 
 //Funcion para Inciar Sesion
 async function Inicio(correo, contrasenia) {
-    //Recibe validacion de la funcion login ubicada en funciones.js
+ //Recibe validacion de la funcion login ubicada en funciones.js
     var save = await login(correo, contrasenia);
-    if (save) { //Retorno True
-        swal("Correcto", "Bienvenido", "success")
-        mostrarPaginaPrincipal()
-    } else { //Retorno False
-        //swal("Error", "Datos erroneos", "error")
-	swal("Correcto", "Bienvenido", "success")
-        mostrarPaginaPrincipal()
+}
 
+function vista2(save){
+    if (save==1) { 
+        swal("Correcto", "Bienvenido", "success")
+    mostrarPaginaPrincipal()
+    } else { //Retorno False
+        swal("Error", "Datos erroneos", "error")
     }
 }
 
 //ACCESO MENU MEDICAMENTOS
 function mostrarPaginaPrincipal() {
-    if (rol == 1) {
-        $("#login").removeClass("animate__animated animate__backInLeft");
-        $("#menu").removeClass("animate__backOutRight");
-        $("#login").addClass("animate__animated animate__backOutLeft");
-        $("#menu").addClass("animate__animated animate__backInRight");
-        $('#menu').show();
-        $('#fondo').hide();
-    } else if (rol == 2) {
-        $("#login").removeClass("animate__animated animate__backInLeft");
-        $("#menuM").removeClass("animate__backOutRight");
-        $("#login").addClass("animate__animated animate__backOutLeft");
-        $("#menuM").addClass("animate__animated animate__backInRight");
-        $('#menuM').show();
-        $('#fondo').hide();
-    } else {
-        $("#login").removeClass("animate__animated animate__backInLeft");
-        $("#menuP").removeClass("animate__backOutRight");
-        $("#login").addClass("animate__animated animate__backOutLeft");
-        $("#menuP").addClass("animate__animated animate__backInRight");
-        $('#menuP').show();
-        $('#fondo').hide();
-    }
+    $("#login").removeClass("animate__animated animate__backInLeft");
+    $("#menu").removeClass("animate__backOutRight");
+    $("#login").addClass("animate__animated animate__backOutLeft");
+    $("#menu").addClass("animate__animated animate__backInRight");
+    $('#Contenido').show();
+    $('#menu').show();
+    $('#fondo').hide();
 }
 
 
@@ -210,8 +189,6 @@ $("#DevolverMedQ").click(function() {
     DevolverConMed()
 });
 
-//Funciones
-
 //Registrar Medicamento
 $("#RegistrarMed").click(function() {
 
@@ -230,9 +207,12 @@ $("#RegistrarMed").click(function() {
 
 //Funcion para el registro
 async function guardarMed(name, des, cint) {
-    //Recibe validacion de la funcion registrarMed ubicada en funciones.js
+ //Recibe validacion de la funcion registrarMed ubicada en funciones.js
     var save = await registrarMed(name, des, cint)
-    if (save) { //Retorno True
+}
+
+function vista3(save){
+    if (save==1) { //Retorno True
         swal("Correcto", "¡Registro exitoso!", "success")
             .then((value) => {
                 DevolverCrearMed()
@@ -248,9 +228,9 @@ async function guardarMed(name, des, cint) {
 $("#ModMed").click(function() {
 
     //Recolectar Datos
-    name = $("#medname").val();
-    des = $("#descp").val();
-    cint = $("#cint").val();
+    name = $("#medname1").val();
+    des = $("#descp1").val();
+    cint = $("#cint1").val();
 
     //Verificar datos
     if (name == "" || des == "" || cint == "") {
@@ -261,15 +241,17 @@ $("#ModMed").click(function() {
 });
 
 async function modMed(name, des, cint) {
-    //Recibe validacion de la funcion modificarMed ubicada en funciones.js
+//Recibe validacion de la funcion modificarMed ubicada en funciones.js
     var save = await modificarMed(name, des, cint)
-    if (save) { //Retorno True
+}
+function vista4(save){    
+   if (save==1) { //Retorno True
         swal("Correcto", "¡Actualización exitosa!", "success")
             .then((value) => {
                 DevolverModMed()
             });
 
-    } else { //Retorno False
+    } else{ //Retorno False
         swal("Error", "Error en el modificar", "error");
     }
 }
@@ -278,7 +260,7 @@ async function modMed(name, des, cint) {
 $("#DelMed").click(function() {
 
     //Recolectar Datos
-    name = $("#medname").val();
+    name = $("#medname2").val();
 
     //Verificar datos
     if (name == "") {
@@ -289,9 +271,11 @@ $("#DelMed").click(function() {
 });
 
 async function delMed(name, des, cint) {
-    //Recibe validacion de la funcion eliminarMed ubicada en funciones.js
+//Recibe validacion de la funcion eliminarMed ubicada en funciones.js
     var save = await eliminarMed(name, des, cint)
-    if (save) { //Retorno True
+}   
+function vista5(save){
+  if (save==1) { //Retorno True
         swal("Correcto", "¡Se ha borrado el medicamento", "success")
         DevolverEliMed()
     } else { //Retorno False
@@ -304,7 +288,7 @@ async function delMed(name, des, cint) {
 $("#QueMed").click(function() {
 
     //Recolectar Datos
-    name = $("#medname").val();
+    name = $("#medname3").val();
 
     //Verificar datos
     if (name == "") {
@@ -315,15 +299,16 @@ $("#QueMed").click(function() {
 });
 
 async function consulMed(name) {
-    //Recibe validacion de la funcion consultarMed ubicada en funciones.js
+//Recibe validacion de la funcion consultarMed ubicada en funciones.js
     var save = await consultarMed(name)
-    if (save) {
-        console.log("si")
+}   
+function vista6(save){
+ if (save==1) {
+    console.log("si")
     } else { //Retorno False
         swal("Error", "Error, no se ha encontrado el medicamento", "error");
     }
 }
-
 
 
 
@@ -436,130 +421,29 @@ $("#DevolverForQP").click(function() {
 });
 
 
-//Funciones
-
-//Registrar Formulas
-$("#RegistrarFor").click(function() {
-
-    //Recolectar Datos
-    nameP = $("#nomP").val();
-    nameM = $("#formedname").val();
-    cant = $("#cant").val();
-    des = $("#descpfor").val();
-    //Verificar datos
-    if (nameP == "" || nameM == "" || des == "" || cant == "") {
-        swal("Error", "Por favor, Ingrese todos los datos", "error");
+//ACCESO MENU MEDICAMENTOS
+function mostrarPaginaPrincipal() {
+    if (rol == 1) {
+        $("#login").removeClass("animate__animated animate__backInLeft");
+        $("#menu").removeClass("animate__backOutRight");
+        $("#login").addClass("animate__animated animate__backOutLeft");
+        $("#menu").addClass("animate__animated animate__backInRight");
+        $('#menu').show();
+        $('#fondo').hide();
+    } else if (rol == 2) {
+        $("#login").removeClass("animate__animated animate__backInLeft");
+        $("#menuM").removeClass("animate__backOutRight");
+        $("#login").addClass("animate__animated animate__backOutLeft");
+        $("#menuM").addClass("animate__animated animate__backInRight");
+        $('#menuM').show();
+        $('#fondo').hide();
     } else {
-        guardarFor(nameP, nameM, des, cant);
-    }
-});
-
-//Funcion para el registro
-async function guardarFor(nameP, nameM, des, cant) {
-    //Recibe validacion de la funcion registrarFor ubicada en funciones.js
-    var save = await registrarFor(nameP, nameM, des, cant)
-    if (save) { //Retorno True
-        swal("Correcto", "¡Registro exitoso!", "success")
-            .then((value) => {
-                DevolverCrearFor()
-            });
-
-    } else { //Retorno False
-        swal("Error", "Error en el registro", "error");
+        $("#login").removeClass("animate__animated animate__backInLeft");
+        $("#menuP").removeClass("animate__backOutRight");
+        $("#login").addClass("animate__animated animate__backOutLeft");
+        $("#menuP").addClass("animate__animated animate__backInRight");
+        $('#menuP').show();
+        $('#fondo').hide();
     }
 }
 
-
-//Modificar Medicamentos
-$("#ModFor").click(function() {
-
-    //Recolectar Datos
-    nameP = $("#nomP").val();
-    nameM = $("#formedname").val();
-    cant = $("#cant").val();
-    des = $("#descpfor").val();
-
-    //Verificar datos
-    if (nameP == "" || nameM == "" || des == "" || cant == "") {
-        swal("Error", "Por favor, Ingrese todos los datos", "error");
-    } else {
-        modFor(nameP, nameM, des, cant);
-    }
-});
-
-async function modFor(nameP, nameM, des, cant) {
-    //Recibe validacion de la funcion modificarFor ubicada en funciones.js
-    var save = await modificarFor(nameP, nameM, des, cant)
-    if (save) { //Retorno True
-        swal("Correcto", "¡Actualización exitosa!", "success")
-            .then((value) => {
-                DevolverModFor()
-            });
-
-    } else { //Retorno False
-        swal("Error", "Error en el modificar", "error");
-    }
-}
-
-//Eliminar Medicamentos
-$("#DelFor").click(function() {
-
-    //Recolectar Datos
-    name = $("#NombreP").val();
-
-    //Verificar datos
-    if (name == "") {
-        swal("Error", "Por favor, Ingrese el nombre del medicamento a eliminar", "error");
-    } else {
-        delFor(name);
-    }
-});
-
-async function delFor(name) {
-    //Recibe validacion de la funcion eliminarFor ubicada en funciones.js
-    var save = await eliminarFor(name)
-    if (save) { //Retorno True
-        swal("Correcto", "¡Se ha borrado el medicamento", "success")
-        DevolverEliFor()
-    } else { //Retorno False
-        swal("Error", "Error, no se ha encontrado el medicamento", "error");
-    }
-}
-
-
-//Consultar Medicamentos
-$("#QueFor").click(function() {
-
-    //Recolectar Datos
-    name = $("#NombreP").val();
-
-    //Verificar datos
-    if (name == "") {
-        swal("Error", "Por favor, Ingrese el nombre del medicamento", "error");
-    } else {
-        consulFor(name);
-    }
-});
-
-$("#QueForP").click(function() {
-
-    //Recolectar Datos
-    name = $("#NombreP").val();
-
-    //Verificar datos
-    if (name == "") {
-        swal("Error", "Por favor, Ingrese el nombre del medicamento", "error");
-    } else {
-        consulFor(name);
-    }
-});
-
-async function consulFor(name) {
-    //Recibe validacion de la funcion consultarFor ubicada en funciones.js
-    var save = await consultarFor(name)
-    if (save) {
-        console.log("si")
-    } else { //Retorno False
-        swal("Error", "Error, no se ha encontrado el medicamento", "error");
-    }
-}
