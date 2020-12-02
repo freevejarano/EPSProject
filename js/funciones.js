@@ -15,7 +15,7 @@ function crearCuenta(nombre, apellido, correo, contrasenia) {
         method: 'POST',
         url: url + '/ControladorRegistro.py',
         dataType: 'json',
-	data: obj,
+    data: obj,
         success: function(rta) {
             response=JSON.parse(rta); 
             if(response.tipo==="OK"){ //Autenticacion de tipo 
@@ -39,19 +39,19 @@ function login(correo, contrasenia){
         "password": contrasenia
     }; //Envio de datos por AJAX con metodo POST
     $.ajax({
-	method: 'POST',
+    method: 'POST',
         url: url + '/ControladorLogin.py', //Ruta Especificada 
         dataType: 'json', //Tipo de dato 
-	data: obj,
-    	success: function(rta) {
-	console.log(rta)
+    data: obj,
+        success: function(rta) {
+    console.log(rta)
             response=JSON.parse(rta);
             if(response.tipo==="OK"){
                  //Envio de True
             }
             else{
                 alert("Error: "+response.mensaje)
-		//Envio de False
+        //Envio de False
             }
         },
         error: function(response){
@@ -72,7 +72,7 @@ function registrarMed(medname,descp,cint) {
     $.ajax({ //Envio de datos por AJAX con metodo POST
         method: 'POST',
         url: url + '/ControlaMedicamentos.py', //Ruta Especificada 
-	data: dat,
+    data: dat,
         dataType: 'json',
         success: function(rta) {
             response=JSON.parse(rta);
@@ -99,8 +99,8 @@ function modificarMed(medname,descp,cint) {
     $.ajax({
         method: 'POST',
         url: url + '/ControladorMedicamentos.py', //Ruta Especificada 
-	data: dat,
-        dataType: 'json',	
+    data: dat,
+        dataType: 'json',   
         success: function(rta) {
             response=JSON.parse(rta);
             if(response.tipo==="OK"){
@@ -124,7 +124,7 @@ function eliminarMed(medname) {
     $.ajax({
         method: 'POST',
         url: url + '/ControladorMedicamentos.py', //Ruta Especificada 
-	data: dat,
+    data: dat,
         dataType: 'json',
         success: function(rta) {
             response=JSON.parse(rta);
@@ -149,7 +149,7 @@ function consultarMed(medname) {
     $.ajax({
         method: 'POST',
         url: url + '/ControladorMedicamentos.py', //Ruta Especificada 
-	data: dat,
+    data: dat,
         dataType: 'json',
         success: function(rta) {
             response=JSON.parse(rta);

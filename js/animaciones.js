@@ -53,7 +53,7 @@ async function guardar(nombre, apellido, correo, contrasenia) {
                 $("#login").addClass("animate__animated animate__backInRight");
             });
 
-    } else{ //Retorno False
+    } else { //Retorno False
         swal("Error", "Error en el registro", "error");
     }
 }
@@ -75,11 +75,11 @@ $("#Ingresar").click(function() {
 
 //Funcion para Inciar Sesion
 async function Inicio(correo, contrasenia) {
- //Recibe validacion de la funcion login ubicada en funciones.js
+    //Recibe validacion de la funcion login ubicada en funciones.js
     var save = await login(correo, contrasenia);
     if (save) { //Retorno True
         swal("Correcto", "Bienvenido", "success")
-	mostrarPaginaPrincipal()
+        mostrarPaginaPrincipal()
     } else { //Retorno False
         swal("Error", "Datos erroneos", "error")
     }
@@ -87,12 +87,28 @@ async function Inicio(correo, contrasenia) {
 
 //ACCESO MENU MEDICAMENTOS
 function mostrarPaginaPrincipal() {
-    $("#login").removeClass("animate__animated animate__backInLeft");
-    $("#menu").removeClass("animate__backOutRight");
-    $("#login").addClass("animate__animated animate__backOutLeft");
-    $("#menu").addClass("animate__animated animate__backInRight");
-    $('#menu').show();
-    $('#fondo').hide();
+    if (rol == 1) {
+        $("#login").removeClass("animate__animated animate__backInLeft");
+        $("#menu").removeClass("animate__backOutRight");
+        $("#login").addClass("animate__animated animate__backOutLeft");
+        $("#menu").addClass("animate__animated animate__backInRight");
+        $('#menu').show();
+        $('#fondo').hide();
+    } else if (rol == 2) {
+        $("#login").removeClass("animate__animated animate__backInLeft");
+        $("#menuM").removeClass("animate__backOutRight");
+        $("#login").addClass("animate__animated animate__backOutLeft");
+        $("#menuM").addClass("animate__animated animate__backInRight");
+        $('#menuM').show();
+        $('#fondo').hide();
+    } else {
+        $("#login").removeClass("animate__animated animate__backInLeft");
+        $("#menuP").removeClass("animate__backOutRight");
+        $("#login").addClass("animate__animated animate__backOutLeft");
+        $("#menuP").addClass("animate__animated animate__backInRight");
+        $('#menuP').show();
+        $('#fondo').hide();
+    }
 }
 
 
@@ -182,6 +198,8 @@ $("#DevolverMedQ").click(function() {
     DevolverConMed()
 });
 
+//Funciones
+
 //Registrar Medicamento
 $("#RegistrarMed").click(function() {
 
@@ -200,7 +218,7 @@ $("#RegistrarMed").click(function() {
 
 //Funcion para el registro
 async function guardarMed(name, des, cint) {
- //Recibe validacion de la funcion registrarMed ubicada en funciones.js
+    //Recibe validacion de la funcion registrarMed ubicada en funciones.js
     var save = await registrarMed(name, des, cint)
     if (save) { //Retorno True
         swal("Correcto", "¡Registro exitoso!", "success")
@@ -231,7 +249,7 @@ $("#ModMed").click(function() {
 });
 
 async function modMed(name, des, cint) {
-//Recibe validacion de la funcion modificarMed ubicada en funciones.js
+    //Recibe validacion de la funcion modificarMed ubicada en funciones.js
     var save = await modificarMed(name, des, cint)
     if (save) { //Retorno True
         swal("Correcto", "¡Actualización exitosa!", "success")
@@ -239,7 +257,7 @@ async function modMed(name, des, cint) {
                 DevolverModMed()
             });
 
-    } else{ //Retorno False
+    } else { //Retorno False
         swal("Error", "Error en el modificar", "error");
     }
 }
@@ -259,7 +277,7 @@ $("#DelMed").click(function() {
 });
 
 async function delMed(name, des, cint) {
-//Recibe validacion de la funcion eliminarMed ubicada en funciones.js
+    //Recibe validacion de la funcion eliminarMed ubicada en funciones.js
     var save = await eliminarMed(name, des, cint)
     if (save) { //Retorno True
         swal("Correcto", "¡Se ha borrado el medicamento", "success")
@@ -285,10 +303,250 @@ $("#QueMed").click(function() {
 });
 
 async function consulMed(name) {
-//Recibe validacion de la funcion consultarMed ubicada en funciones.js
+    //Recibe validacion de la funcion consultarMed ubicada en funciones.js
     var save = await consultarMed(name)
     if (save) {
-	console.log("si")
+        console.log("si")
+    } else { //Retorno False
+        swal("Error", "Error, no se ha encontrado el medicamento", "error");
+    }
+}
+
+
+
+
+//FORMULAS
+//Se esconde el menu y se habilita el formulario deseado con su respectiva animacion
+//Ir al form Crear
+$("#CrearF").click(function() {
+    $("#crearfor").removeClass("animate__animated animate__backOutLeft");
+    $("#menuM").removeClass("animate__backInRight");
+    $("#menuM").addClass(" animate__backOutRight");
+    $("#crearfor").addClass("animate__animated animate__backInLeft");
+    $('#crearfor').show();
+});
+
+//Ir al form Modificar
+$("#ModificarF").click(function() {
+    $("#modfor").removeClass("animate__animated animate__backOutLeft");
+    $("#menuM").removeClass("animate__backInRight");
+    $("#menuM").addClass(" animate__backOutRight");
+    $("#modfor").addClass("animate__animated animate__backInLeft");
+    $('#modfor').show();
+});
+
+//Ir al form Consultar
+$("#ConsultarF").click(function() {
+    $("#quefor").removeClass("animate__animated animate__backOutLeft");
+    $("#menuM").removeClass("animate__backInRight");
+    $("#menuM").addClass(" animate__backOutRight");
+    $("#quefor").addClass("animate__animated animate__backInLeft");
+    $('#quefor').show();
+});
+
+
+//Ir al form Consultar desde Paciente
+$("#ConsultarP").click(function() {
+    $("#queforp").removeClass("animate__animated animate__backOutLeft");
+    $("#menuP").removeClass("animate__backInRight");
+    $("#menuP").addClass(" animate__backOutRight");
+    $("#queforp").addClass("animate__animated animate__backInLeft");
+    $('#queforp').show();
+});
+
+
+//Ir al form  Eliminar
+$("#EliminarF").click(function() {
+    $("#delfor").removeClass("animate__animated animate__backOutLeft");
+    $("#menuM").removeClass("animate__backInRight");
+    $("#menuM").addClass(" animate__backOutRight");
+    $("#delfor").addClass("animate__animated animate__backInLeft");
+    $('#delfor').show();
+});
+
+//Ir al menú Central de Medicamentos
+//Se declaran fucniones para el llamado posterior. Cierra el formualrio y se devuelve al menu principal 
+
+function DevolverCrearFor() {
+    $("#crearfor").removeClass("animate__animated animate__backInLeft");
+    $("#menuM").removeClass("animate__backOutRight");
+    $("#crearfor").addClass("animate__animated animate__backOutLeft");
+    $("#menuM").addClass("animate__animated animate__backInRight");
+}
+
+function DevolverModFor() {
+    $("#modfor").removeClass("animate__animated animate__backInLeft");
+    $("#menuM").removeClass("animate__backOutRight");
+    $("#modfor").addClass("animate__animated animate__backOutLeft");
+    $("#menuM").addClass("animate__animated animate__backInRight");
+}
+
+function DevolverEliFor() {
+    $("#delfor").removeClass("animate__animated animate__backInLeft");
+    $("#menuM").removeClass("animate__backOutRight");
+    $("#delfor").addClass("animate__animated animate__backOutLeft");
+    $("#menuM").addClass("animate__animated animate__backInRight");
+}
+
+function DevolverConFor() {
+    $("#quefor").removeClass("animate__animated animate__backInLeft");
+    $("#menuM").removeClass("animate__backOutRight");
+    $("#quefor").addClass("animate__animated animate__backOutLeft");
+    $("#menuM").addClass("animate__animated animate__backInRight");
+}
+
+function DevolverConForP() {
+    $("#queforP").removeClass("animate__animated animate__backInLeft");
+    $("#menuP").removeClass("animate__backOutRight");
+    $("#queforP").addClass("animate__animated animate__backOutLeft");
+    $("#menuP").addClass("animate__animated animate__backInRight");
+}
+
+//Asignacion de funciones a las acciones de los botones 
+$("#DevolverFor").click(function() {
+    DevolverCrearFor()
+});
+
+$("#DevolverForM").click(function() {
+    DevolverModFor()
+});
+
+$("#DevolverForD").click(function() {
+    DevolverEliFor()
+});
+
+$("#DevolverForQ").click(function() {
+    DevolverConFor()
+});
+
+$("#DevolverForQP").click(function() {
+    DevolverConForP()
+});
+
+
+//Funciones
+
+//Registrar Formulas
+$("#RegistrarFor").click(function() {
+
+    //Recolectar Datos
+    nameP = $("#nomP").val();
+    nameM = $("#formedname").val();
+    cant = $("#cant").val();
+    des = $("#descpfor").val();
+    //Verificar datos
+    if (nameP == "" || nameM == "" || des == "" || cant == "") {
+        swal("Error", "Por favor, Ingrese todos los datos", "error");
+    } else {
+        guardarFor(nameP, nameM, des, cant);
+    }
+});
+
+//Funcion para el registro
+async function guardarFor(nameP, nameM, des, cant) {
+    //Recibe validacion de la funcion registrarFor ubicada en funciones.js
+    var save = await registrarFor(nameP, nameM, des, cant)
+    if (save) { //Retorno True
+        swal("Correcto", "¡Registro exitoso!", "success")
+            .then((value) => {
+                DevolverCrearFor()
+            });
+
+    } else { //Retorno False
+        swal("Error", "Error en el registro", "error");
+    }
+}
+
+
+//Modificar Medicamentos
+$("#ModFor").click(function() {
+
+    //Recolectar Datos
+    nameP = $("#nomP").val();
+    nameM = $("#formedname").val();
+    cant = $("#cant").val();
+    des = $("#descpfor").val();
+
+    //Verificar datos
+    if (nameP == "" || nameM == "" || des == "" || cant == "") {
+        swal("Error", "Por favor, Ingrese todos los datos", "error");
+    } else {
+        modFor(nameP, nameM, des, cant);
+    }
+});
+
+async function modFor(nameP, nameM, des, cant) {
+    //Recibe validacion de la funcion modificarFor ubicada en funciones.js
+    var save = await modificarFor(nameP, nameM, des, cant)
+    if (save) { //Retorno True
+        swal("Correcto", "¡Actualización exitosa!", "success")
+            .then((value) => {
+                DevolverModFor()
+            });
+
+    } else { //Retorno False
+        swal("Error", "Error en el modificar", "error");
+    }
+}
+
+//Eliminar Medicamentos
+$("#DelFor").click(function() {
+
+    //Recolectar Datos
+    name = $("#NombreP").val();
+
+    //Verificar datos
+    if (name == "") {
+        swal("Error", "Por favor, Ingrese el nombre del medicamento a eliminar", "error");
+    } else {
+        delFor(name);
+    }
+});
+
+async function delFor(name) {
+    //Recibe validacion de la funcion eliminarFor ubicada en funciones.js
+    var save = await eliminarFor(name)
+    if (save) { //Retorno True
+        swal("Correcto", "¡Se ha borrado el medicamento", "success")
+        DevolverEliFor()
+    } else { //Retorno False
+        swal("Error", "Error, no se ha encontrado el medicamento", "error");
+    }
+}
+
+
+//Consultar Medicamentos
+$("#QueFor").click(function() {
+
+    //Recolectar Datos
+    name = $("#NombreP").val();
+
+    //Verificar datos
+    if (name == "") {
+        swal("Error", "Por favor, Ingrese el nombre del medicamento", "error");
+    } else {
+        consulFor(name);
+    }
+});
+
+$("#QueForP").click(function() {
+
+    //Recolectar Datos
+    name = $("#NombreP").val();
+
+    //Verificar datos
+    if (name == "") {
+        swal("Error", "Por favor, Ingrese el nombre del medicamento", "error");
+    } else {
+        consulFor(name);
+    }
+});
+
+async function consulFor(name) {
+    //Recibe validacion de la funcion consultarFor ubicada en funciones.js
+    var save = await consultarFor(name)
+    if (save) {
+        console.log("si")
     } else { //Retorno False
         swal("Error", "Error, no se ha encontrado el medicamento", "error");
     }

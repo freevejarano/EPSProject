@@ -72,6 +72,15 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="Rol">Rol</label>
+                    <p>
+                        <select id="rol" name="rolist" class="form-control"> <option value="Paciente">Paciente </option>
+                            <option value="Medico">Médico</option>
+                            <option value="Operario">Operario</option>
+            </select>
+                </div>
+
+                <div class="form-group">
                     <label for="Correo">Correo</label>
                     <input type="email" id="email" class="form-control" placeholder="Correo Electrónico">
                 </div>
@@ -95,6 +104,7 @@
     </div>
 
     <!--Pagina Principal -->
+    <!--Operario-->
     <div id="Contenido" style="display:none">
         <br>
         <br>
@@ -113,7 +123,7 @@
 
                 </form>
         </div>
- <!--Formularios Medicamentos -->
+        <!--Formularios Medicamentos -->
         <div id="crearmed" style="display: none;" class="animate__animated animate__pulse">
             <br>
             <h3 align="center">Nuevo Medicamento</h3>
@@ -211,12 +221,189 @@
         </div>
     </div>
 
+    <!--Medico-->
+    <div id="ContenidoM" style="display:none">
+        <br>
+        <br>
+        <div id="menuM" style="display: none;" class="animate__animated animate__pulse">
+            <h2>Control de Formulas</h2>
+            <br>
+            <p>Escoja una opción entre las siguientes:
+                <form>
+                    <div class="col text-center">
+                        <button id="CrearF" type="button" class="btn btn-outline-warning">Crea</button>
+                        <button id="ConsultarF" type="button" class="btn btn-outline-success">Consulta</button><br>
+                        <button id="ModificarF" type="button" class="btn btn-outline-success">Modifica</button>
+                        <button id="EliminarF" type="button" class="btn btn-outline-warning">Elimina</button><br>
+                        <button id="CerrarF" type="submit" class="btn btn-danger">Cerrar Sesión</button>
+                    </div>
+
+                </form>
+        </div>
+        <!--Formularios Formulas -->
+        <div id="crearfor" style="display: none;" class="animate__animated animate__pulse">
+            <br>
+            <h3 align="center">Nueva Fórmula</h3>
+            <br>
+            <form>
+                <div class="form-group">
+                    <label for="NombreP">Nombre Paciente:</label>
+                    <input type="text" id="nomP" class="form-control" placeholder="Paciente">
+                </div>
+
+                <div class="form-group">
+                    <label for="Nombremed">Nombre del medicamento</label>
+                    <input id="formedname" type="text" class="form-control" placeholder="Nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="Cant">Cantidad</label>
+                    <input id="cant" type="text" class="form-control" placeholder="Cantidad">
+                </div>
+
+                <div class="form-group">
+                    <label for="Descrip">Descripción</label>
+                    <input id="descpfor" type="text" class="form-control" placeholder="Descripcion">
+                </div>
+
+                <div class="col text-center">
+                    <button id="DevolverFor" type="button" class="btn btn-outline-danger">Cancelar</button>
+                    <button id="RegistrarFor" type="button" class="btn btn-outline-info">Crear</button>
+
+                </div>
+            </form>
+        </div>
+        <div id="modfor" style="display: none;" class="animate__animated animate__pulse">
+            <br>
+            <h3 align="center">Modificar Fórmula</h3>
+            <br>
+            <form>
+
+                <div class="form-group">
+                    <label for="NombreP">Nombre Paciente:</label>
+                    <input type="text" id="nomP" class="form-control" placeholder="Paciente">
+                </div>
+
+                <div class="form-group">
+                    <label for="Nombremed">Nombre del medicamento</label>
+                    <input id="formedname" type="text" class="form-control" placeholder="Nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="Cant">Cantidad</label>
+                    <input id="cant" type="text" class="form-control" placeholder="Cantidad">
+                </div>
+
+                <div class="form-group">
+                    <label for="Descrip">Descripción</label>
+                    <input id="descpfor" type="text" class="form-control" placeholder="Descripcion">
+                </div>
+
+                <div class="col text-center">
+                    <button id="DevolverForM" type="button" class="btn btn-outline-danger">Cancelar</button>
+                    <button id="ModFor" type="button" class="btn btn-outline-info">Modificar</button>
+
+                </div>
+            </form>
+        </div>
+        <div id="delfor" style="display: none;" class="animate__animated animate__pulse">
+            <br>
+            <h3 align="center">Eliminar Medicamento</h3>
+            <br>
+            <form>
+                <div class="form-group">
+                    <label for="NombreP">Nombre Paciente:</label>
+                    <input type="text" id="nomP" class="form-control" placeholder="Paciente">
+                </div>
+                <div class="col text-center">
+                    <button id="DevolverForD" type="button" class="btn btn-outline-danger">Cancelar</button>
+                    <button id="DelFor" type="button" class="btn btn-outline-warning">Eliminar</button>
+
+                </div>
+            </form>
+        </div>
+        <div id="quefor" style="display: none;" class="animate__animated animate__pulse">
+            <br>
+            <h3 align="center">Consulta de Formula</h3>
+            <br>
+            <form>
+                <div class="form-group">
+                    <label for="NombreP">Nombre Paciente:</label>
+                    <input type="text" id="nomP" class="form-control" placeholder="Paciente">
+                </div>
+
+                <div class="form-group">
+                    <label for="Nombremed">Nombre del medicamento</label>
+                    <input id="formedname" type="text" class="form-control" placeholder="Nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="Cant">Cantidad</label>
+                    <input id="cant" type="text" class="form-control" placeholder="Cantidad">
+                </div>
+
+                <div class="form-group">
+                    <label for="Descrip">Descripción</label>
+                    <input id="descpfor" type="text" class="form-control" placeholder="Descripcion">
+                </div>
+                <div class="col text-center">
+                    <button id="DevolverForQ" type="button" class="btn btn-outline-danger">Cancelar</button>
+                    <button id="QueFor" type="button" class="btn btn-outline-success">Consultar</button>
+
+                </div>
+            </form>
+        </div>
     </div>
+    <!--Paciente-->
+    <div id="ContenidoP" style="display:none">
+        <br>
+        <br>
+        <div id="menuP" style="display: none;" class="animate__animated animate__pulse">
+            <h2>Bienvenido</h2>
+            <br>
+            <p>Para consultar sus fórmulas presione el botón:
+                <form>
+                    <div class="col text-center">
+                        <button id="ConsultarP" type="button" class="btn btn-outline-success">Consulta</button><br>
+                        <button id="CerrarP" type="submit" class="btn btn-danger">Cerrar Sesión</button>
+                    </div>
+
+                </form>
+        </div>
+        <div id="queforp" style="display: none;" class="animate__animated animate__pulse">
+            <br>
+            <h3 align="center">Consulta de Formula</h3>
+            <br>
+            <form>
+                <div class="form-group">
+                    <label for="NombreP">Nombre Paciente:</label>
+                    <input type="text" id="nomP" class="form-control" placeholder="Paciente">
+                </div>
+
+                <div class="form-group">
+                    <label for="Nombremed">Nombre del medicamento</label>
+                    <input id="formedname" type="text" class="form-control" placeholder="Nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="Cant">Cantidad</label>
+                    <input id="cant" type="text" class="form-control" placeholder="Cantidad">
+                </div>
+
+                <div class="form-group">
+                    <label for="Descrip">Descripción</label>
+                    <input id="descpfor" type="text" class="form-control" placeholder="Descripcion">
+                </div>
+                <div class="col text-center">
+                    <button id="DevolverForQP" type="button" class="btn btn-outline-danger">Cancelar</button>
+                    <button id="QueForP" type="button" class="btn btn-outline-success">Consultar</button>
+
+                </div>
+            </form>
+        </div>
 
 
-
-
-
+    </div>
 
     <!--JavaScript -->
     <script src="js/animaciones.js" type="text/javascript"></Script>
