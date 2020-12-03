@@ -231,7 +231,7 @@ async function guardarMed(name, des, cint) {
             });
 
     } else { //Retorno False
-        swal("Error", "Error en el registro", "error");
+//        swal("Error", "Error en el registro", "error");
     }
 }
 
@@ -273,7 +273,7 @@ async function modMed(name, des, cint) {
             });
 
     } else { //Retorno False
-        swal("Error", "Error en el modificar", "error");
+  //      swal("Error", "Error en el modificar", "error");
     }
 }
 
@@ -285,7 +285,7 @@ function vista4(save) {
             });
 
     } else { //Retorno False
-        swal("Error", "Error en el modificar", "error");
+    //    swal("Error", "Error en el modificar", "error");
     }
 }
 
@@ -310,7 +310,7 @@ async function delMed(name, des, cint) {
         swal("Correcto", "¡Se ha borrado el medicamento", "success")
         DevolverEliMed()
     } else { //Retorno False
-        swal("Error", "Error, no se ha encontrado el medicamento", "error");
+      //  swal("Error", "Error, no se ha encontrado el medicamento", "error");
     }
 }
 
@@ -319,7 +319,7 @@ function vista5(save) {
         swal("Correcto", "¡Se ha borrado el medicamento", "success")
         DevolverEliMed()
     } else { //Retorno False
-        swal("Error", "Error, no se ha encontrado el medicamento", "error");
+    //    swal("Error", "Error, no se ha encontrado el medicamento", "error");
     }
 }
 
@@ -344,7 +344,7 @@ async function consulMed(name) {
     if (save) {
         console.log("si")
     } else { //Retorno False
-        swal("Error", "Error, no se ha encontrado el medicamento", "error");
+      //  swal("Error", "Error, no se ha encontrado el medicamento", "error");
         console.log(save)
     }
 }
@@ -353,7 +353,7 @@ function vista6(save) {
     if (save == 1) {
         console.log("si")
     } else { //Retorno False
-        swal("Error", "Error, no se ha encontrado el medicamento", "error");
+        //swal("Error", "Error, no se ha encontrado el medicamento", "error");
     }
 }
 
