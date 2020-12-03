@@ -1,4 +1,4 @@
-var url1="http://ec2-34-229-184-217.compute-1.amazonaws.com:5000/";
+var url1="ec2-34-229-70-186.compute-1.amazonaws.com:5000/";
 
 new Vue({
       el: '#app',
