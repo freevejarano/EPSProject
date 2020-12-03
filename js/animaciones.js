@@ -209,9 +209,9 @@ $("#DevolverMedQ").click(function() {
 $("#RegistrarMed").click(function() {
 
     //Recolectar Datos
-    name = $("#medname").val();
-    des = $("#descp").val();
-    cint = $("#cint").val();
+    name = $("#medname1").val();
+    des = $("#descp1").val();
+    cint = $("#cint1").val();
 
     //Verificar datos
     if (name == "" || des == "" || cint == "") {
@@ -252,9 +252,9 @@ function vista3(save) {
 $("#ModMed").click(function() {
 
     //Recolectar Datos
-    name = $("#medname").val();
-    des = $("#descp").val();
-    cint = $("#cint").val();
+    name = $("#medname2").val();
+    des = $("#descp2").val();
+    cint = $("#cint2").val();
 
     //Verificar datos
     if (name == "" || des == "" || cint == "") {
@@ -294,7 +294,7 @@ function vista4(save) {
 $("#DelMed").click(function() {
 
     //Recolectar Datos
-    name = $("#medname").val();
+    name = $("#medname3").val();
 
     //Verificar datos
     if (name == "") {
@@ -328,7 +328,7 @@ function vista5(save) {
 $("#QueMed").click(function() {
 
     //Recolectar Datos
-    name = $("#medname").val();
+    name = $("#medname4").val();
 
     //Verificar datos
     if (name == "") {
