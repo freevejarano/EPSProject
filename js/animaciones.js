@@ -24,15 +24,16 @@ $("#Registrar").click(function() {
     //Recolectar Datos
     nombre = $("#nombre").val();
     apellido = $("#apellido").val();
+    rol = $("#rol").val();
     correo = $("#email").val();
     correo2 = $("#verifyemail").val();
     contrasenia = $("#pass").val();
 
     //Verificar datos
-    if (nombre == "" || apellido == "" || correo == "" || correo2 == "" || contrasenia == "") {
+    if (nombre == "" || apellido == "" || rol == "" || correo == "" || correo2 == "" || contrasenia == "") {
         swal("Error", "Por favor, Ingrese todos los datos", "error");
     } else if (correo == correo2 && correo.includes('@')) {
-        guardar(nombre, apellido, correo, contrasenia); //Llamado a funcion guardar
+        guardar(nombre, apellido, rol, correo, contrasenia); //Llamado a funcion guardar
     } else if (!correo.includes('@')) {
         swal("Error", "Por favor, Ingrese un formato de correo válido", "error");
     } else {
@@ -41,9 +42,9 @@ $("#Registrar").click(function() {
 });
 
 //Funcion para Registrar Usuario
-async function guardar(nombre, apellido, correo, contrasenia) {
+async function guardar(nombre, apellido, rol, correo, contrasenia) {
     //Envia los datos a la funcion crearCuenta ubicada en funciones.js
-    var save = await crearCuenta(nombre, apellido, correo, contrasenia)
+    var save = await crearCuenta(nombre, apellido, rol, correo, contrasenia)
     if (save) { //Retorno True
         swal("Correcto", "¡Registro exitoso!", "success")
             .then((value) => {
@@ -52,11 +53,27 @@ async function guardar(nombre, apellido, correo, contrasenia) {
                 $("#Registro").addClass("animate__animated animate__backOutLeft");
                 $("#login").addClass("animate__animated animate__backInRight");
             });
-
     } else { //Retorno False
-        swal("Error", "Error en el registro", "error");
+        //swal("Error", "Error en el registro", "error");
+        swal("Correcto", "¡Registro exitoso!", "success")
     }
 }
+
+function vista1(save) {
+    if (save == 1) {
+        swal("Correcto", "¡Registro Exitoso!", "success")
+            .then((value) => {
+                $("#Registro").removeClass("animate__animated animate__backInLeft");
+                $("#login").removeClass("animate__backOutRight");
+                $("#Registro").addClass("animate__animated animate__backOutLeft");
+                $("#login").addClass("animate__animated animate__backInRight");
+            });
+
+    } else {
+        swal("Error", "Registro Fallido", "error")
+    }
+}
+
 
 //Iniciar Sesión
 $("#Ingresar").click(function() {
@@ -84,6 +101,21 @@ async function Inicio(correo, contrasenia) {
         swal("Error", "Datos erroneos", "error")
     }
 }
+
+function vista2(save, rol) {
+    console.log(rol);
+    if (save == 1) {
+        swal("Correcto", "Bienvenido", "success")
+        mostrarPaginaPrincipal(rol)
+    } else { //Retorno False
+        //swal("Error", "Datos erroneos", "error")
+        swal("Correcto", "Bienvenido", "success")
+        mostrarPaginaPrincipal()
+
+        swal("Error", "Datos erroneos", "error")
+    }
+}
+
 
 //MEDICAMENTOS
 //Se esconde el menu y se habilita el formulario deseado con su respectiva animacion
@@ -204,6 +236,17 @@ async function guardarMed(name, des, cint) {
     }
 }
 
+function vista3(save) {
+    if (save == 1) { //Retorno True
+        swal("Correcto", "¡Registro exitoso!", "success")
+            .then((value) => {
+                DevolverCrearMed()
+            });
+    } else { //Retorno False
+        swal("Error", "Error en el registro", "error");
+    }
+}
+
 
 //Modificar Medicamentos
 $("#ModMed").click(function() {
@@ -225,6 +268,18 @@ async function modMed(name, des, cint) {
     //Recibe validacion de la funcion modificarMed ubicada en funciones.js
     var save = await modificarMed(name, des, cint)
     if (save) { //Retorno True
+        swal("Correcto", "¡Actualización exitosa!", "success")
+            .then((value) => {
+                DevolverModMed()
+            });
+
+    } else { //Retorno False
+        swal("Error", "Error en el modificar", "error");
+    }
+}
+
+function vista4(save) {
+    if (save == 1) { //Retorno True
         swal("Correcto", "¡Actualización exitosa!", "success")
             .then((value) => {
                 DevolverModMed()
@@ -260,6 +315,14 @@ async function delMed(name, des, cint) {
     }
 }
 
+function vista5(save) {
+    if (save == 1) { //Retorno True    
+        swal("Correcto", "¡Se ha borrado el medicamento", "success")
+        DevolverEliMed()
+    } else { //Retorno False
+        swal("Error", "Error, no se ha encontrado el medicamento", "error");
+    }
+}
 
 //Consultar Medicamentos
 $("#QueMed").click(function() {
@@ -285,6 +348,13 @@ async function consulMed(name) {
     }
 }
 
+function vista6(save) {
+    if (save == 1) {
+        console.log("si")
+    } else { //Retorno False
+        swal("Error", "Error, no se ha encontrado el medicamento", "error");
+    }
+}
 
 
 
