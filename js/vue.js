@@ -1,14 +1,17 @@
 var url1="ec2-34-229-70-186.compute-1.amazonaws.com:5000/";
 
-var app= new Vue({
+new Vue({
       el: '#app',
-       data:{
+      vuetify: new Vuetify(),
+       data(){
+           return{
             formulas: [],            
             paciente: null,
             medicamento: null,
             cantidad: null,
             descripcion: null
-       },
+       }
+      },
        methods:{          
             //MÉTODOS PARA EL CRUD
             mostrarF:function(){
