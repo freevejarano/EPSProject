@@ -329,7 +329,7 @@ $("#QueMed").click(function() {
 
     //Recolectar Datos
     name = $("#medname4").val();
-
+    console.log("main",name);
     //Verificar datos
     if (name == "") {
         swal("Error", "Por favor, Ingrese el nombre del medicamento", "error");
@@ -340,11 +340,13 @@ $("#QueMed").click(function() {
 
 async function consulMed(name) {
     //Recibe validacion de la funcion consultarMed ubicada en funciones.js
+    console.log("consulmed",name);
     var save = await consultarMed(name)
     if (save) {
         console.log("si")
     } else { //Retorno False
         swal("Error", "Error, no se ha encontrado el medicamento", "error");
+        console.log(save)
     }
 }
 

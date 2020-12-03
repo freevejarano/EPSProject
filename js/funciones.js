@@ -156,6 +156,7 @@ function eliminarMed(medname) {
 }
 
 function consultarMed(medname) {
+   console.log("m",medname);
     var dat = {
         "medname": medname,
         "act": 'cons'
@@ -166,16 +167,18 @@ function consultarMed(medname) {
     data: dat,
         dataType: 'json',
         success: function(rta) {
+       console.log(rta.Nombre);
        if(rta.Nombre===undefined){
-             $("#medname3").val("")
-             $("#descp3").val("")
-             $("#cint3").val("")
+             $("#medname4").val("")
+             $("#descp4").val("")
+             $("#cint4").val("")
 
         vista6(2)
        }else{ 
-             $("#medname3").val(rta.Nombre)
-             $("#descp3").val(rta.Desc)
-             $("#cint3").val(rta.Contra)
+             console.log("No fallo");
+             $("#medname4").val(rta.Nombre)
+             $("#descp4").val(rta.Desc)
+             $("#cint4").val(rta.Contra)
     }
         },
         error: function(response){
