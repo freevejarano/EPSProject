@@ -1,7 +1,7 @@
 var url1="ec2-34-229-70-186.compute-1.amazonaws.com:5000/";
 
 new Vue({
-      el: '#app',
+      el: '#ContenidoM',
       vuetify: new Vuetify(),
        data () {
         return {            
