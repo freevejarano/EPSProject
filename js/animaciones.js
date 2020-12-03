@@ -82,25 +82,17 @@ async function Inicio(correo, contrasenia) {
     var save = await login(correo, contrasenia);
 }
 
-function vista2(save){
+function vista2(save,rol){
+   console.log(rol);
     if (save==1) { 
         swal("Correcto", "Bienvenido", "success")
-    mostrarPaginaPrincipal()
+    mostrarPaginaPrincipal(rol)
     } else { //Retorno False
         swal("Error", "Datos erroneos", "error")
     }
 }
 
 //ACCESO MENU MEDICAMENTOS
-function mostrarPaginaPrincipal() {
-    $("#login").removeClass("animate__animated animate__backInLeft");
-    $("#menu").removeClass("animate__backOutRight");
-    $("#login").addClass("animate__animated animate__backOutLeft");
-    $("#menu").addClass("animate__animated animate__backInRight");
-    $('#Contenido').show();
-    $('#menu').show();
-    $('#fondo').hide();
-}
 
 
 //MEDICAMENTOS
@@ -422,12 +414,13 @@ $("#DevolverForQP").click(function() {
 
 
 //ACCESO MENU MEDICAMENTOS
-function mostrarPaginaPrincipal() {
+function mostrarPaginaPrincipal(rol) {
     if (rol == 1) {
         $("#login").removeClass("animate__animated animate__backInLeft");
         $("#menu").removeClass("animate__backOutRight");
         $("#login").addClass("animate__animated animate__backOutLeft");
         $("#menu").addClass("animate__animated animate__backInRight");
+        $('#Contenido').show();
         $('#menu').show();
         $('#fondo').hide();
     } else if (rol == 2) {
@@ -435,6 +428,7 @@ function mostrarPaginaPrincipal() {
         $("#menuM").removeClass("animate__backOutRight");
         $("#login").addClass("animate__animated animate__backOutLeft");
         $("#menuM").addClass("animate__animated animate__backInRight");
+        $('#ContenidoM').show();
         $('#menuM').show();
         $('#fondo').hide();
     } else {
@@ -442,8 +436,9 @@ function mostrarPaginaPrincipal() {
         $("#menuP").removeClass("animate__backOutRight");
         $("#login").addClass("animate__animated animate__backOutLeft");
         $("#menuP").addClass("animate__animated animate__backInRight");
+        $('#ContenidoP').show();
         $('#menuP').show();
         $('#fondo').hide();
     }
-}
 
+}

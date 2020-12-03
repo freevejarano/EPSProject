@@ -35,23 +35,30 @@ function crearCuenta(nombre, apellido, correo, contrasenia) {
 // Inciar Sesion
 function login(correo, contrasenia){
  //Almecena los datos en JSON
-    var  obj = {
+    var  dat = {
         "email": correo,
         "password": contrasenia
     }; //Envio de datos por AJAX con metodo POST
     $.ajax({
     method: 'POST',
         url: url + '/ControladorLogin.py', //Ruta Especificada 
+        data:dat,
         dataType: 'json', //Tipo de dato
-    data: obj,
         success: function(rta) {
-    console.log(rta)
-            response=JSON.parse(rta);
-            if(response.tipo==="OK"){
-               vista2(1)
+           console.log(rta)
+            if(rta.Rol===undefined){
+               vista2(2,"")
             }
             else{
-                vista2(2)
+                aux=0
+                if(rta.Rol=="Operario"){
+                   aux=1;
+                } else if(rta.Rol=="Medico"){
+                  aux=2;
+                } else if(rta.Rol=="Paciente"){
+                aux=3;
+                }
+              vista2(1, aux);
         //Envio de False
             }
         },
