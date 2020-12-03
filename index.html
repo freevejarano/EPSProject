@@ -226,16 +226,16 @@
     <div id="ContenidoM" style="display:none">
         <br>
         <br>
-        <div id="menuM" style="display: none;" class="animate__animated animate__pulse">
+        <div id="menuM" style="display: none;" class="animate__animated animate__pulse" v-show="opcion1">
             <h2>Control de Formulas</h2>
             <br>
             <p>Escoja una opción entre las siguientes:
                 <form>
                     <div class="col text-center">
-                        <button id="CrearF" type="button" class="btn btn-outline-warning">Crea</button>
-                        <button id="ConsultarF" type="button" class="btn btn-outline-success">Consulta</button><br>
-                        <button id="ModificarF" type="button" class="btn btn-outline-success">Modifica</button>
-                        <button id="EliminarF" type="button" class="btn btn-outline-warning">Elimina</button><br>
+                        <button id="CrearF" type="button" class="btn btn-outline-warning" v-on:click="f">Crea</button>
+                        <button id="ConsultarF" type="button" class="btn btn-outline-success" v-on:click="fu">Consulta</button><br>
+                        <button id="ModificarF" type="button" class="btn btn-outline-success" v-on:click="fun">Modifica</button>
+                        <button id="EliminarF" type="button" class="btn btn-outline-warning" v-on:click="func">Elimina</button><br>
                         <button id="CerrarF" type="submit" class="btn btn-danger">Cerrar Sesión</button>
                     </div>
 
@@ -243,7 +243,7 @@
         </div>
         <!--Formularios Formulas -->
 
-        <div id="crearfor" style="display: none;" class="animate__animated animate__pulse">
+        <div id="crearfor" style="display: none;" class="animate__animated animate__pulse" v-show="opcion2">
             <br>
             <h3 align="center">Nueva Fórmula</h3>
             <br>
@@ -269,13 +269,13 @@
                 </div>
 
                 <div class="col text-center">
-                    <button id="DevolverFor" type="button" class="btn btn-outline-danger">Cancelar</button>
+                    <button id="DevolverFor" type="button" class="btn btn-outline-danger" v-on:click="funci">Cancelar</button>
                     <button id="RegistrarFor" v-on:click="crear(paciente,medica,cantidad,descrip)" type="button" class="btn btn-outline-info">Crear</button>
 
                 </div>
             </form>
         </div>
-        <div id="modfor" style="display: none;" class="animate__animated animate__pulse">
+        <div id="modfor" style="display: none;" class="animate__animated animate__pulse" v-show="opcion3">
             <br>
             <h3 align="center">Modificar Fórmula</h3>
             <br>
@@ -302,13 +302,13 @@
                 </div>
 
                 <div class="col text-center">
-                    <button id="DevolverForM" type="button" class="btn btn-outline-danger">Cancelar</button>
+                    <button id="DevolverForM" type="button" class="btn btn-outline-danger" v-on:click="funci">Cancelar</button>
                     <button id="ModFor" v-on:click="modificar(paciente,medica,cantidad,descrip)" type="button" class="btn btn-outline-info">Modificar</button>
 
                 </div>
             </form>
         </div>
-        <div id="delfor" style="display: none;" class="animate__animated animate__pulse">
+        <div id="delfor" style="display: none;" class="animate__animated animate__pulse" v-show="opcion4">
             <br>
             <h3 align="center">Eliminar Fórmula</h3>
             <br>
@@ -318,13 +318,13 @@
                     <input type="text" v-model="paciente" id="nomP3" class="form-control" placeholder="Paciente">
                 </div>
                 <div class="col text-center">
-                    <button id="DevolverForD" type="button" class="btn btn-outline-danger">Cancelar</button>
+                    <button id="DevolverForD" type="button" class="btn btn-outline-danger" v-on:click="funci">Cancelar</button>
                     <button id="DelFor" v-on:click="borrar(paciente)" type="button" class="btn btn-outline-warning">Eliminar</button>
 
                 </div>
             </form>
         </div>
-        <div id="quefor" style="display: none;" class="animate__animated animate__pulse">
+        <div id="quefor" style="display: none;" class="animate__animated animate__pulse" v-show="opcion5">
             <br>
             <h3 align="center">Consulta de Formula</h3>
             <br>
@@ -349,7 +349,7 @@
                     <input id="descpfor4" v-model="descrip" type="text" class="form-control" placeholder="Descripcion">
                 </div>
                 <div class="col text-center">
-                    <button id="DevolverForQ" type="button" class="btn btn-outline-danger">Cancelar</button>
+                    <button v-on:click="funci" id="DevolverForQ" type="button" class="btn btn-outline-danger">Cancelar</button>
                     <button id="QueFor" v-on:click="consultar(paciente)" type="button" class="btn btn-outline-success">Consultar</button>
 
                 </div>
@@ -357,7 +357,7 @@
         </div>
     </div>
     <!--Paciente-->
-    <div id="ContenidoP" style="display:none">
+    <div id="ContenidoP" style="display:none" v-show="opcion11">
     <br>
     <br>
     <div id="menuP" style="display: none;" class="animate__animated animate__pulse">
@@ -366,13 +366,13 @@
         <p>Para consultar sus fórmulas presione el botón:</p>
             <form>
                 <div class="col text-center">
-                    <button id="ConsultarP" type="button" class="btn btn-outline-success">Consulta</button><br>
+                    <button id="ConsultarP" type="button" class="btn btn-outline-success" v-on:click="funcion">Consulta</button><br>
                     <button id="CerrarP" type="submit" class="btn btn-danger">Cerrar Sesión</button>
                 </div>
 
             </form>
     </div>
-    <div id="queforp" style="display: none;" class="animate__animated animate__pulse">
+    <div id="queforp" style="display: none;" class="animate__animated animate__pulse" v-show="opcion12">
         <br>
         <h3 align="center">Consulta de Formula</h3>
         <br>
@@ -397,7 +397,7 @@
                 <input id="descpfor5" v-model="descrip" type="text" class="form-control" placeholder="Descripcion">
             </div>
             <div class="col text-center">
-                <button id="DevolverForQP" type="button" class="btn btn-outline-danger">Cancelar</button>
+                <button id="DevolverForQP" type="button" class="btn btn-outline-danger" v-on:click="funcion2">Cancelar</button>
                 <button id="QueForP"  v-on:click="consultar(paciente)" type="button" class="btn btn-outline-success">Consultar</button>
 
             </div>
@@ -560,6 +560,69 @@ var app7=new Vue({
  }
 });
 
+var app10 = new Vue({
+  el: '#ContenidoM',
+  data: {
+    opcion1: false,
+    opcion2: false,
+    opcion3: false,
+    opcion4: false,
+    opcion5: false,
+  },methods:{
+     f: function () {
+            this.opcion1= false,
+            this.opcion3= false,
+            this.opcion4= false,
+            this.opcion5= false,
+            this.opcion2= true;
+        },
+     fu: function () {
+            this.opcion1= false,
+            this.opcion2= false,
+            this.opcion4= false,
+            this.opcion5= false,
+            this.opcion3= true;
+        },
+     fun: function () {
+            this.opcion1= false,
+            this.opcion2= false,
+            this.opcion3= false,
+            this.opcion5= false,
+            this.opcion4= true;
+        },
+     func: function () {
+            this.opcion1= false,
+            this.opcion2= false,
+            this.opcion3= false,
+            this.opcion4= false,
+            this.opcion5= true;
+        },
+    funci: function () {
+            this.opcion5= false,
+            this.opcion2= false,
+            this.opcion3= false,
+            this.opcion4= false,
+            this.opcion1= true;
+        },
+}
+});
+
+var app12 = new Vue({
+  el: '#ContenidoP',
+  data: {
+    opcion11: false,
+    opcion12: false,
+  },methods:{
+     funcion: function () {
+            this.opcion11= false,
+            this.opcion12= true;
+        },
+    funcion2: function () {
+            this.opcion12= false,
+            this.opcion11= true;
+        },
+}
+});
 
 </script>
 
