@@ -1,4 +1,4 @@
-//LOGIN-REGISTRO
+var url1="//LOGIN-REGISTRO
 
 //Ir al menú Registrar desde el Login
 $("#Entrar").click(function() {
@@ -94,12 +94,12 @@ $("#Ingresar").click(function() {
 async function Inicio(correo, contrasenia) {
     //Recibe validacion de la funcion login ubicada en funciones.js
     var save = await login(correo, contrasenia);
-   // if (save) { //Retorno True
-    //    swal("Correcto", "Bienvenido", "success")
-     //   mostrarPaginaPrincipal()
-  //  } else { //Retorno False
-   //     swal("Error", "Datos erroneos", "error")
-  //  }
+    if (save) { //Retorno True
+        swal("Correcto", "Bienvenido", "success")
+        mostrarPaginaPrincipal()
+    } else { //Retorno False
+        swal("Error", "Datos erroneos", "error")
+    }
 }
 
 function vista2(save, rol) {
@@ -108,10 +108,11 @@ function vista2(save, rol) {
         swal("Correcto", "Bienvenido", "success")
         mostrarPaginaPrincipal(rol)
     } else { //Retorno False
+        //swal("Error", "Datos erroneos", "error")
         swal("Correcto", "Bienvenido", "success")
-        mostrarPaginaPrincipal(rol)
+        mostrarPaginaPrincipal()
 
-       // swal("Error", "Datos erroneos", "error")
+        swal("Error", "Datos erroneos", "error")
     }
 }
 
@@ -208,9 +209,9 @@ $("#DevolverMedQ").click(function() {
 $("#RegistrarMed").click(function() {
 
     //Recolectar Datos
-    name = $("#medname1").val();
-    des = $("#descp1").val();
-    cint = $("#cint1").val();
+    name = $("#medname").val();
+    des = $("#descp").val();
+    cint = $("#cint").val();
 
     //Verificar datos
     if (name == "" || des == "" || cint == "") {
@@ -251,9 +252,9 @@ function vista3(save) {
 $("#ModMed").click(function() {
 
     //Recolectar Datos
-    name = $("#medname2").val();
-    des = $("#descp2").val();
-    cint = $("#cint2").val();
+    name = $("#medname").val();
+    des = $("#descp").val();
+    cint = $("#cint").val();
 
     //Verificar datos
     if (name == "" || des == "" || cint == "") {
@@ -293,7 +294,7 @@ function vista4(save) {
 $("#DelMed").click(function() {
 
     //Recolectar Datos
-    name = $("#medname3").val();
+    name = $("#medname").val();
 
     //Verificar datos
     if (name == "") {
@@ -327,8 +328,8 @@ function vista5(save) {
 $("#QueMed").click(function() {
 
     //Recolectar Datos
-    name = $("#medname4").val();
-    console.log("main",name);
+    name = $("#medname").val();
+
     //Verificar datos
     if (name == "") {
         swal("Error", "Por favor, Ingrese el nombre del medicamento", "error");
@@ -339,13 +340,11 @@ $("#QueMed").click(function() {
 
 async function consulMed(name) {
     //Recibe validacion de la funcion consultarMed ubicada en funciones.js
-    console.log("consulmed",name);
     var save = await consultarMed(name)
     if (save) {
         console.log("si")
     } else { //Retorno False
         swal("Error", "Error, no se ha encontrado el medicamento", "error");
-        console.log(save)
     }
 }
 
@@ -495,4 +494,55 @@ function mostrarPaginaPrincipal(rol) {
         $('#menuP').show();
         $('#fondo').hide();
     }
-}
+}:5000/";
+
+new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+       data () {
+        return {            
+            formulas: [],            
+            paciente: null,
+            medicamento: null,
+            cantidad: null,
+            descripcion: null
+        }
+       },
+       methods:{          
+            //MÉTODOS PARA EL CRUD
+            mostrarF:function(){
+              axios.get(url1+"formula", {paciente:this.paciente})
+              .then(response =>{
+                var form = response.data;
+                this.paciente= form.paciente;
+                this.medicamento=form.doctor;
+                this.cantidad=form.cantidad;
+                this.descripcion=form.descripcion;
+              })
+            },
+            insertarF:function(){    
+                this.paciente=            
+                axios.post(url1+"crearFormula", {paciente: this.paciente, medicamento: this.medicamento, cantidad: this.cantidad, descripcion: this.descripcion})
+                .then(response =>{
+                  Swal.fire('Formula Insertada', '', 'success');
+                });   
+                this.paciente= "";
+                this.medicamento= "";
+                this.cantidad= "";
+                this.descripcion= "";
+            },  
+            actualizarF:function(id, descripcion, precio, stock){
+              axios.post(url1+"actualizarFormula", {paciente: this.paciente, medicamento: this.medicamento, cantidad: this.cantidad, descripcion: this.descripcion})
+                  .then(response =>{
+                    Swal.fire('Formula Actualizada', '', 'success');
+              }); 
+            },             
+            borrarF:function(id){               
+              axios.post(url1+"borrarFormula", {paciente: this.paciente})
+                  .then(response =>{           
+                    Swal.fire('Formula Actualizada', '', 'success');
+              });      
+                            
+            }
+       }      
+    });
