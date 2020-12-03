@@ -220,7 +220,7 @@
             </form>
         </div>
     </div>
-
+<div id="app">
     <!--Medico-->
     <div id="ContenidoM" style="display:none">
         <br>
@@ -248,26 +248,26 @@
             <form>
                 <div class="form-group">
                     <label for="NombreP">Nombre Paciente:</label>
-                    <input type="text" id="nomP" class="form-control" placeholder="Paciente">
+                    <input type="text" v-model="paciente" id="nomP" class="form-control" placeholder="Paciente">
                 </div>
 
                 <div class="form-group">
                     <label for="Nombremed">Nombre del medicamento</label>
-                    <input id="formedname" type="text" class="form-control" placeholder="Nombre">
+                    <input id="formedname" v-model="medicamento" type="text" class="form-control" placeholder="Nombre">
                 </div>
 
                 <div class="form-group">
                     <label for="Cant">Cantidad</label>
-                    <input id="cant" type="text" class="form-control" placeholder="Cantidad">
+                    <input id="cant" v-model="cantidad" type="text" class="form-control" placeholder="Cantidad">
                 </div>
 
                 <div class="form-group">
                     <label for="Descrip">Descripción</label>
-                    <input id="descpfor" type="text" class="form-control" placeholder="Descripcion">
+                    <input id="descpfor" v-model="descripcion" type="text" class="form-control" placeholder="Descripcion">
                 </div>
 
                 <div class="col text-center">
-                    <button id="DevolverFor" type="button" class="btn btn-outline-danger">Cancelar</button>
+                    <button id="DevolverFor" type="button" v-on:click="insertarF" class="btn btn-outline-danger">Cancelar</button>
                     <button id="RegistrarFor" type="button" class="btn btn-outline-info">Crear</button>
 
                 </div>
@@ -281,27 +281,27 @@
 
                 <div class="form-group">
                     <label for="NombreP">Nombre Paciente:</label>
-                    <input type="text" id="nomP" class="form-control" placeholder="Paciente">
+                    <input type="text" id="nomP" v-model="paciente" class="form-control" placeholder="Paciente">
                 </div>
 
                 <div class="form-group">
                     <label for="Nombremed">Nombre del medicamento</label>
-                    <input id="formedname" type="text" class="form-control" placeholder="Nombre">
+                    <input id="formedname" v-model="medicamento" type="text" class="form-control" placeholder="Nombre">
                 </div>
 
                 <div class="form-group">
                     <label for="Cant">Cantidad</label>
-                    <input id="cant" type="text" class="form-control" placeholder="Cantidad">
+                    <input id="cant" v-model="cantidad" type="text" class="form-control" placeholder="Cantidad">
                 </div>
 
                 <div class="form-group">
                     <label for="Descrip">Descripción</label>
-                    <input id="descpfor" type="text" class="form-control" placeholder="Descripcion">
+                    <input id="descpfor" v-model="descripcion" type="text" class="form-control" placeholder="Descripcion">
                 </div>
 
                 <div class="col text-center">
                     <button id="DevolverForM" type="button" class="btn btn-outline-danger">Cancelar</button>
-                    <button id="ModFor" type="button" class="btn btn-outline-info">Modificar</button>
+                    <button id="ModFor" v-on:click="actualizarF" type="button" class="btn btn-outline-info">Modificar</button>
 
                 </div>
             </form>
@@ -313,11 +313,11 @@
             <form>
                 <div class="form-group">
                     <label for="NombreP">Nombre Paciente:</label>
-                    <input type="text" id="nomP" class="form-control" placeholder="Paciente">
+                    <input type="text" v-model="paciente" id="nomP" class="form-control" placeholder="Paciente">
                 </div>
                 <div class="col text-center">
                     <button id="DevolverForD" type="button" class="btn btn-outline-danger">Cancelar</button>
-                    <button id="DelFor" type="button" class="btn btn-outline-warning">Eliminar</button>
+                    <button id="DelFor" type="button" v-on:click="borrarF" class="btn btn-outline-warning">Eliminar</button>
 
                 </div>
             </form>
@@ -329,26 +329,26 @@
             <form>
                 <div class="form-group">
                     <label for="NombreP">Nombre Paciente:</label>
-                    <input type="text" id="nomP" class="form-control" placeholder="Paciente">
+                    <input type="text" v-model="paciente" id="nomP" class="form-control" placeholder="Paciente">
                 </div>
 
                 <div class="form-group">
                     <label for="Nombremed">Nombre del medicamento</label>
-                    <input id="formedname" type="text" class="form-control" placeholder="Nombre">
+                    <input id="formedname" v-model="medicamento" type="text" class="form-control" placeholder="Nombre">
                 </div>
 
                 <div class="form-group">
                     <label for="Cant">Cantidad</label>
-                    <input id="cant" type="text" class="form-control" placeholder="Cantidad">
+                    <input id="cant" v-model="cantidad" type="text" class="form-control" placeholder="Cantidad">
                 </div>
 
                 <div class="form-group">
                     <label for="Descrip">Descripción</label>
-                    <input id="descpfor" type="text" class="form-control" placeholder="Descripcion">
+                    <input id="descpfor" v-model="descripcion" type="text" class="form-control" placeholder="Descripcion">
                 </div>
                 <div class="col text-center">
                     <button id="DevolverForQ" type="button" class="btn btn-outline-danger">Cancelar</button>
-                    <button id="QueFor" type="button" class="btn btn-outline-success">Consultar</button>
+                    <button id="QueFor" type="button" v-on:click="mostrarF" class="btn btn-outline-success">Consultar</button>
 
                 </div>
             </form>
@@ -401,13 +401,16 @@
                 </div>
             </form>
         </div>
-
+</div>
 
     </div>
 
     <!--JavaScript -->
     <script src="js/animaciones.js" type="text/javascript"></Script>
     <script src="js/funciones.js" type="text/javascript"></Script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
     <script src="js/vue.js" type="text/javascript"></Script>
 
 </body>
